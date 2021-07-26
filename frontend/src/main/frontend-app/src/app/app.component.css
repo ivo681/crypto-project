@@ -1,0 +1,38 @@
+.home{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+  /* min-height: 100vh; */
+}
+
+.home-wrapper{
+  width: 80%;
+  margin: 40px auto;
+}
+
+.home-wrapper-card{
+  justify-content: space-around;
+  color: white !important;
+  background-color: transparent !important;
+  border: none;
+}
+
+.home-wrapper-card-desc{
+  max-width: 65%;
+}
+
+.home-wrapper-card-desc > img{
+  max-width: 300px;
+  width: 100%;
+}
+
+.home-wrapper-card-img{
+  max-width: 300px;
+}
+
+button.btn > a{
+  color: white;
+  text-decoration: none;
+}

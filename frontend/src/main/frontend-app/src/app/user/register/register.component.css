@@ -1,0 +1,74 @@
+/*.login-register-wrapper{*/
+/*  margin: 25px auto 0 auto;*/
+/*  !*margin: 70px auto 0 auto;*!*/
+/*}*/
+
+
+.login-register{
+  background: transparent !important;
+  backdrop-filter: blur(100px);
+  color: white;
+  font-weight: bolder;
+  font-size: 18px;
+  text-align: center;
+  table-layout:fixed;
+  border: 1px solid white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkout-cart{
+  width: 35%;
+}
+
+.checkout-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.checkout-form > form > div:nth-child(2){
+  justify-content: center;
+}
+
+.checkout-form ::placeholder{
+  text-align: center;
+}
+
+ul.list-group > li{
+  align-items: center;
+}
+
+li.list-group-item > div:nth-child(1){
+  display: flex;
+  color: black;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+li.list-group-item > span, li.list-group-item > strong{
+  color: black;
+}
+
+hr{
+  background-color: white;
+}
+
+.login-register-flex{
+  display: flex;
+  flex-direction: column;
+}
+
+.message{
+
+  font-size: 13px;
+}
+
+.form-signin input, .form-signin button{
+  margin-bottom: 1rem;
+}
+
+label{
+  font-size: 13px;
+}

@@ -1,0 +1,24 @@
+@import url('assets/static/css/bootstrap.min.css');
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body{
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url('assets/static/img/pierre-borthiry-vBCVcWUyvyM-unsplash (1).jpg');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  margin-bottom: 60px;
+}
+
+header{
+  position: absolute;
+}
+
+main{
+  margin: 170px auto;
+}
+

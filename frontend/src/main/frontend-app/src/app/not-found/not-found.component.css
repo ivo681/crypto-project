@@ -1,0 +1,8 @@
+.not-found{
+  color: white !important;
+  backdrop-filter: blur(2px);
+}
+
+a.mail-to{
+  text-decoration: underline;
+}

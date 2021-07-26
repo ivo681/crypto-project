@@ -1,0 +1,15 @@
+
+/*body {*/
+/*  min-height: 75rem;*/
+/*  padding-top: 4.5rem;*/
+/*}*/
+
+
+nav{
+  background: linear-gradient(90deg, rgba(133,117,255,1) 32%, rgba(24,76,164,1) 69%);
+  margin-bottom: 1.5em;
+}
+
+#navbarCollapse > button.btn.btn-success{
+  margin-right: 6px;
+}

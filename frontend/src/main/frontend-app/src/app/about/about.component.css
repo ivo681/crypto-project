@@ -1,0 +1,14 @@
+.about-us{
+  width: 96%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-us-text{
+  backdrop-filter: blur(2px);
+  font-size: 22px;
+  font-weight: bolder;
+  text-align:center;
+}
+
