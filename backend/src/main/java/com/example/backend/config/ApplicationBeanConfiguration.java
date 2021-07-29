@@ -4,7 +4,11 @@ import com.google.gson.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.request.RequestContextListener;
 
@@ -24,7 +28,7 @@ public class ApplicationBeanConfiguration {
 
     @Bean
     public PasswordEncoder create(){
-        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
@@ -47,4 +51,6 @@ public class ApplicationBeanConfiguration {
     public Random createNewRandom(){
         return new Random();
     }
+
+
 }

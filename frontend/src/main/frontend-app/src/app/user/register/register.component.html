@@ -1,43 +1,89 @@
 <section class="login-register-wrapper">
   <section class="login-register">
 
-    <form class="form-signin login-register-flex">
+    <form #f="ngForm"
+          (submit)="f.form.valid && sendRegisterRequest()"
+          class="form-signin login-register-flex">
       <img src="/assets/static/img/ecf8a64431fe4fc4aadc37346a88af2a (3).png" alt="" />
       <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
-      <!-- <label for="inputEmail">Email address</label> -->
+      <!-- <label for="email">Email address</label> -->
+      <small *ngIf="existingEmail"
+             class="form-text bg-danger rounded">
+        There is already a user with this email address, please use another one</small>
       <input
         type="email"
-        id="inputEmail"
+        name="email"
+        [(ngModel)]="model.email"
+        #email="ngModel"
+        [ngClass]="{'is-invalid input-validation-error' : f.submitted && email.invalid}"
         class="form-control"
         placeholder="Email address"
         required
         autofocus
       />
-
-      <!-- <label for="inputPassword">Password</label> -->
+      <div *ngIf="(f.submitted && email.invalid) || modelError.email">
+        <small *ngIf="email.errors?.required || email.errors?.email || modelError.email"
+               class="form-text bg-danger rounded">
+          Please provide a valid email</small>
+      </div>
+      <!-- <label for="password">Password</label> -->
       <input
         type="password"
-        id="inputPassword"
+        name="password"
+        [(ngModel)]="model.password"
+        #password="ngModel"
+        [ngClass]="{'is-invalid input-validation-error' : f.submitted && password.invalid}"
         class="form-control"
         placeholder="Password"
         required
       />
+      <div *ngIf="(f.submitted && password.invalid) || modelError.password">
+<!--        <small *ngIf="password.errors?.required"-->
+<!--               class="text-light form-text bg-danger rounded">-->
+<!--          Password field cannot be empty</small>-->
+        <small *ngFor="let err of modelError.password"
+               class="text-light form-text bg-danger rounded">
+          {{err}}</small>
+      </div>
       <!-- <label for="confirmPassword">Confirm password</label> -->
       <input
         type="password"
-        id="confirmPassword"
+        name="confirmPassword"
+        [(ngModel)]="model.confirmPassword"
+        #confirmPassword="ngModel"
+        [ngClass]="{'is-invalid input-validation-error' : f.submitted && confirmPassword.invalid}"
         class="form-control"
         placeholder="Confirm password"
         required
       />
+      <div *ngIf="(f.submitted && confirmPassword.invalid) || modelError.confirmPassword">
+<!--        <small *ngIf="confirmPassword.errors?.required"-->
+<!--               class="text-light form-text bg-danger rounded">-->
+<!--          Password field cannot be empty</small>-->
+        <small *ngFor="let err of modelError.confirmPassword"
+               class="text-light form-text bg-danger rounded">
+          {{err}}</small>
+      </div>
       <label for="dateOfBirth">Date of birth</label>
       <input
         type="date"
         id="dateOfBirth"
+        name="dateOfBirth"
+        [(ngModel)]="model.dateOfBirth"
+        #dateOfBirth="ngModel"
+        [ngClass]="{'is-invalid input-validation-error' : f.submitted && dateOfBirth.invalid}"
         class="form-control"
         placeholder="Password"
         required
       />
+      <div *ngIf="(f.submitted && dateOfBirth.invalid) || modelError.dateOfBirth">
+        <small *ngIf="dateOfBirth.errors?.required"
+               class="text-light form-text bg-danger rounded">
+          Date of birth field cannot be empty</small>
+        <small *ngFor="let err of modelError.dateOfBirth"
+               class="text-light form-text bg-danger rounded">
+          {{err}}</small>
+      </div>
       <p class="message">Already registered?
         <a [routerLink]="['../login']">Login</a></p>
       <button class="btn btn-lg btn-success btn-block" type="submit">

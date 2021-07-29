@@ -66,9 +66,13 @@ hr{
 }
 
 .form-signin input, .form-signin button{
-  margin-bottom: 1rem;
+  margin-bottom: 5px;
 }
 
 label{
   font-size: 13px;
+}
+small.bg-danger{
+max-width: 200px;
+margin-bottom: 10px;
 }

@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.config.security.UserPrincipal;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +25,8 @@ public class UserDetailsService implements org.springframework.security.core.use
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = this.userRepository.findByEmail(email).
                 orElseThrow(()-> new UsernameNotFoundException("User with email " + email + " was not found"));
-        return mapToUserDetails(user);
+//        return mapToUserDetails(user);
+        return UserPrincipal.create(user);
     }
 
     private UserDetails mapToUserDetails(User user){
@@ -36,5 +39,14 @@ public class UserDetailsService implements org.springframework.security.core.use
         );
 
         return result;
+    }
+
+    @Transactional
+    public UserDetails loadUserById(String id) {
+        User user = this.userRepository
+                .findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
+
+        return UserPrincipal.create(user);
     }
 }

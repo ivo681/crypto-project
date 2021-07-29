@@ -8,6 +8,8 @@ import { AboutComponent } from './about/about.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import {UserModule} from "./user/user.module";
+import {FormsModule} from "@angular/forms";
+import { HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,9 +22,12 @@ import {UserModule} from "./user/user.module";
     BrowserModule,
     CoreModule,
     UserModule,
+    FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

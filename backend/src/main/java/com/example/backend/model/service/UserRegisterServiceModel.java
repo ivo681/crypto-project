@@ -1,32 +1,19 @@
 package com.example.backend.model.service;
 
+import com.example.backend.model.validators.FieldMatch;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
+
 public class UserRegisterServiceModel {
-    private String firstName;
-    private String lastName;
     private LocalDate dateOfBirth;
     private String email;
     private String password;
     private String confirmPassword;
 
     public UserRegisterServiceModel() {
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public LocalDate getDateOfBirth() {

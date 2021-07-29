@@ -72,3 +72,8 @@ hr{
 label{
   font-size: 13px;
 }
+
+small.bg-danger{
+  max-width: 200px;
+  margin-bottom: 10px;
+}
