@@ -1,0 +1,4 @@
+<ul *ngIf="products" class="product-list">
+  <app-product-list-item *ngFor="let coin of products" [coin] = "coin"></app-product-list-item>
+</ul>
+

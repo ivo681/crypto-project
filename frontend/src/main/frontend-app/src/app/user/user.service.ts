@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
 import {IUser} from "../shared/interfaces";
 import {LocalStorage} from "../core/injection-tokens";
 import {HttpClient} from "@angular/common/http";
@@ -10,19 +10,32 @@ import {UserRegisterBindingModel} from "../shared/interfaces/user-register-bindi
 })
 export class UserService {
   user: IUser | undefined;
+  private renderer?: Renderer2;
 
   get isLogged(): boolean {
-    return !!this.user;
+    let isUserLogged = !!this.user;
+    if (isUserLogged){
+      this.renderer?.removeClass(document.body, "not-logged");
+      this.renderer?.addClass(document.body, "logged")
+    } else {
+      this.renderer?.addClass(document.body, "not-logged")
+    }
+    return isUserLogged;
+  }
+
+  get userEmail(): string {
+    return this.localStorage.getItem('email') || '';
   }
 
   constructor(@Inject(LocalStorage) private localStorage: Window['localStorage'],
-              private httpClient: HttpClient) {
+              private httpClient: HttpClient, private rendererFactory: RendererFactory2) {
     try {
       const localStorageUser = this.localStorage.getItem('<USER>') || 'ERROR';
       this.user = JSON.parse(localStorageUser);
     } catch {
       this.user = undefined;
     }
+    this.renderer = rendererFactory.createRenderer(null, null);
   }
 
 
@@ -47,6 +60,7 @@ export class UserService {
 
     this.user = response.user;
     this.localStorage.setItem('<USER>', JSON.stringify(response.user));
+
   }
 
   register(formData: UserRegisterBindingModel) {
@@ -61,5 +75,7 @@ export class UserService {
     this.user = undefined;
     // this.localStorage.removeItem('<USER>');
     this.localStorage.clear();
+    this.renderer?.removeClass(document.body, "logged");
+    this.renderer?.addClass(document.body, "not-logged")
   }
 }

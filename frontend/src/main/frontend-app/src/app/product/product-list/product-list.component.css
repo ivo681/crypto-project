@@ -1,0 +1,14 @@
+ul.product-list{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+ul.product-list > app-product-list-item{
+  flex-basis: 20%;
+}

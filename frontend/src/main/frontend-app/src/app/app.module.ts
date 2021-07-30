@@ -10,6 +10,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {UserModule} from "./user/user.module";
 import {FormsModule} from "@angular/forms";
 import { HttpClientModule} from "@angular/common/http";
+import {ProductModule} from "./product/product.module";
+import {MarketModule} from "./market/market.module";
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { HttpClientModule} from "@angular/common/http";
     BrowserModule,
     CoreModule,
     UserModule,
+    ProductModule,
+    MarketModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule

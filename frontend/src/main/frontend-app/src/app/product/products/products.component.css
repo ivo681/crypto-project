@@ -1,0 +1,7 @@
+.home-wrapper-card{
+  backdrop-filter: blur(4px);
+}
+
+.home-wrapper-card > h1{
+  text-align: center;
+}
