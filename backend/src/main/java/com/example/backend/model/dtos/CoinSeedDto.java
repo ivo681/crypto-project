@@ -1,29 +1,29 @@
-package com.example.backend.model;
+package com.example.backend.model.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Entity
-@Table(name = "coins")
-public class Coin extends BaseEntity{
+public class CoinSeedDto {
+    @Expose
     private String name;
+    @Expose
     private Long quantity;
+    @Expose
     private BigDecimal initialPrice;
+    @Expose
     private BigDecimal yesterdaysAvgPrice;
+    @Expose
     private List<BigDecimal> dailyPrices;
+    @Expose
     private BigDecimal previousPrice;
+    @Expose
     private BigDecimal currentPrice;
 
-    public Coin() {
+    public CoinSeedDto() {
     }
 
-    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -32,7 +32,6 @@ public class Coin extends BaseEntity{
         this.name = name;
     }
 
-    @Column(name = "quantity", nullable = false)
     public Long getQuantity() {
         return quantity;
     }
@@ -41,16 +40,6 @@ public class Coin extends BaseEntity{
         this.quantity = quantity;
     }
 
-    @Column(name = "current_price", nullable = false)
-    public BigDecimal getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(BigDecimal currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
-    @Column(name = "initial_price", nullable = false)
     public BigDecimal getInitialPrice() {
         return initialPrice;
     }
@@ -59,7 +48,6 @@ public class Coin extends BaseEntity{
         this.initialPrice = initialPrice;
     }
 
-    @Column(name = "yesterday_avg_price", nullable = false)
     public BigDecimal getYesterdaysAvgPrice() {
         return yesterdaysAvgPrice;
     }
@@ -68,7 +56,6 @@ public class Coin extends BaseEntity{
         this.yesterdaysAvgPrice = yesterdaysAvgPrice;
     }
 
-    @ElementCollection
     public List<BigDecimal> getDailyPrices() {
         return dailyPrices;
     }
@@ -77,12 +64,19 @@ public class Coin extends BaseEntity{
         this.dailyPrices = dailyPrices;
     }
 
-    @Column(name = "previous_price", nullable = false)
     public BigDecimal getPreviousPrice() {
         return previousPrice;
     }
 
     public void setPreviousPrice(BigDecimal previousPrice) {
         this.previousPrice = previousPrice;
+    }
+
+    public BigDecimal getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(BigDecimal currentPrice) {
+        this.currentPrice = currentPrice;
     }
 }

@@ -1,0 +1,52 @@
+table{
+  /* -webkit-text-stroke: 0.3px black; */
+  width: 90%;
+  margin: 10px auto;
+  backdrop-filter: blur(100px);
+  color: white;
+  font-weight: bolder;
+  font-size: 18px;
+  text-align: center;
+  table-layout:fixed;
+  border: 1px solid white;
+}
+
+th{
+  max-width:100%;
+  white-space:nowrap;
+}
+
+.table-hover td, .table-hover th{
+  vertical-align: middle;
+  padding: 10px;
+}
+
+thead > tr > th:nth-child(1){
+  width: 10%;
+}
+
+thead > tr > th:nth-child(2){
+  text-align: center;
+  width: 22%;
+}
+
+td > img{
+  max-width: 35px;
+  width: 100%;
+  margin-right: 15px;
+}
+
+.table-hover td, .table-hover th{
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.coin-list{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.coin-list img, .coin-list span{
+  border: none;
+}

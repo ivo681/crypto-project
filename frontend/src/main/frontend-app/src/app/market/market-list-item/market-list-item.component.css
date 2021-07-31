@@ -1,0 +1,20 @@
+td > img{
+  max-width: 35px;
+  width: 100%;
+  margin-right: 15px;
+}
+
+.table-hover td, .table-hover th{
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.coin-list{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.coin-list img, .coin-list span{
+  border: none;
+}

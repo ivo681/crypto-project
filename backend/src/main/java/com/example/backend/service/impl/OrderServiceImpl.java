@@ -58,14 +58,14 @@ public class OrderServiceImpl implements OrderService {
 //        ArrayList<Product> products = new ArrayList<>(order.getProducts());
 //        return String.format("%s x %s -> %s", products.size(), products
 //                        .get(0).getName(),
-//                (BigDecimal.valueOf(order.getProducts().size()).multiply(order.getProducts().stream().findFirst().get().getPrice())).toPlainString());
+//                (BigDecimal.valueOf(order.getProducts().size()).multiply(order.getProducts().stream().findFirst().get().getCurrentPrice())).toPlainString());
 //    }
 
 //    @Override
 //    public BigDecimal getOrderTotal(String orderId) {
 //        Order order = this.orderRepository.findById(orderId).get();
 //        ArrayList<Product> products = new ArrayList<>(order.getProducts());
-//        return (BigDecimal.valueOf(order.getProducts().size()).multiply(order.getProducts().stream().findFirst().get().getPrice()));
+//        return (BigDecimal.valueOf(order.getProducts().size()).multiply(order.getProducts().stream().findFirst().get().getCurrentPrice()));
 //    }
 //
 //    @Override

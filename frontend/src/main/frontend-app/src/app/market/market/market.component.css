@@ -1,0 +1,16 @@
+.home-wrapper{
+  width: 100%;
+  margin: 40px auto;
+}
+
+.buy{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buy-wrapper{
+  width: 80%;
+  margin: 40px auto;
+}

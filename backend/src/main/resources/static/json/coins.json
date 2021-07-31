@@ -1,0 +1,130 @@
+[
+	{
+		"name": "Buci",
+		"initialPrice": "3.35",
+		"yesterdaysAvgPrice": "5.22",
+		"previousPrice": "4.85",
+		"currentPrice": "1.77",
+		"quantity": 868358
+	},
+	{
+		"name": "Bozhi",
+		"initialPrice": "5.87",
+		"yesterdaysAvgPrice": "2.34",
+		"previousPrice": "3.57",
+		"currentPrice": "1.91",
+		"quantity": 396872
+	},
+	{
+		"name": "Bacho",
+		"initialPrice": "5.39",
+		"yesterdaysAvgPrice": "5.29",
+		"previousPrice": "1.15",
+		"currentPrice": "1.70",
+		"quantity": 436587
+	},
+	{
+		"name": "Bulgar",
+		"initialPrice": "2.39",
+		"yesterdaysAvgPrice": "2.01",
+		"previousPrice": "2.05",
+		"currentPrice": "2.63",
+		"quantity": 571358
+	},
+	{
+		"name": "Cherep",
+		"initialPrice": "3.81",
+		"yesterdaysAvgPrice": "1.24",
+		"previousPrice": "4.44",
+		"currentPrice": "4.04",
+		"quantity": 919486
+	},
+	{
+		"name": "Djipko",
+		"initialPrice": "5.81",
+		"yesterdaysAvgPrice": "4.18",
+		"previousPrice": "1.35",
+		"currentPrice": "3.23",
+		"quantity": 584702
+	},
+	{
+		"name": "Dubai",
+		"initialPrice": "4.42",
+		"yesterdaysAvgPrice": "1.08",
+		"previousPrice": "2.45",
+		"currentPrice": "4.58",
+		"quantity": 681965
+	},
+	{
+		"name": "General",
+		"initialPrice": "6.00",
+		"yesterdaysAvgPrice": "0.83",
+		"previousPrice": "1.91",
+		"currentPrice": "3.35",
+		"quantity": 347457
+	},
+	{
+		"name": "Grisho",
+		"initialPrice": "3.94",
+		"yesterdaysAvgPrice": "3.76",
+		"previousPrice": "0.89",
+		"currentPrice": "1.16",
+		"quantity": 933630
+	},
+	{
+		"name": "Kobra",
+		"initialPrice": "2.07",
+		"yesterdaysAvgPrice": "0.99",
+		"previousPrice": "1.92",
+		"currentPrice": "4.45",
+		"quantity": 931981
+	},
+	{
+		"name": "KTB",
+		"initialPrice": "4.62",
+		"yesterdaysAvgPrice": "1.49",
+		"previousPrice": "5.85",
+		"currentPrice": "1.49",
+		"quantity": 557708
+	},
+	{
+		"name": "Kasket",
+		"initialPrice": "4.75",
+		"yesterdaysAvgPrice": "3.20",
+		"previousPrice": "2.76",
+		"currentPrice": "4.70",
+		"quantity": 251359
+	},
+	{
+		"name": "Kuku",
+		"initialPrice": "3.57",
+		"yesterdaysAvgPrice": "3.85",
+		"previousPrice": "2.70",
+		"currentPrice": "1.09",
+		"quantity": 407311
+	},
+	{
+		"name": "Maia",
+		"initialPrice": "3.16",
+		"yesterdaysAvgPrice": "2.82",
+		"previousPrice": "4.47",
+		"currentPrice": "4.32",
+		"quantity": 980952
+	},
+	{
+		"name": "Sarai",
+		"initialPrice": "2.75",
+		"yesterdaysAvgPrice": "5.88",
+		"previousPrice": "1.21",
+		"currentPrice": "2.00",
+		"quantity": 522548
+	},
+	{
+		"name": "Shishi",
+		"initialPrice": "5.62",
+		"yesterdaysAvgPrice": "2.15",
+		"previousPrice": "1.48",
+		"currentPrice": "1.94",
+		"quantity": 994082
+	}
+]
