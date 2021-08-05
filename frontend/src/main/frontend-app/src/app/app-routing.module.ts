@@ -1,14 +1,15 @@
 import {Routes, RouterModule} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import {AboutComponent} from "./about/about.component";
-import {NotFoundComponent} from "./not-found/not-found.component";
-import {ProductsComponent} from "./product/products/products.component";
-import {LoginComponent} from "./user/login/login.component";
+import {ProductsComponent} from "./modules/product/products/products.component";
+import {LoginComponent} from "./modules/user/login/login.component";
 import {AuthActivate} from "./core/guards/auth.activate";
-import {MarketComponent} from "./market/market/market.component";
-import {UnauthorizedComponent} from "./unauthorized/unauthorized.component";
+import {MarketComponent} from "./modules/market/market/market.component";
 import {AdminGuard} from "./core/guards/admin.guard";
-import {AdminMenuComponent} from "./admin/admin-menu/admin-menu.component";
+import {AdminMenuComponent} from "./modules/admin/admin-menu/admin-menu.component";
+import {UnauthorizedComponent} from "./modules/errors/unauthorized/unauthorized.component";
+import {NotFoundComponent} from "./modules/errors/not-found/not-found.component";
+import {ServerErrorComponent} from "./modules/errors/server-error/server-error.component";
 
 const routes : Routes = [
   {
@@ -40,6 +41,11 @@ const routes : Routes = [
     path:'unauthorized',
     pathMatch: 'full',
     component: UnauthorizedComponent,
+  },
+  {
+    path:'server-error',
+    pathMatch: 'full',
+    component: ServerErrorComponent,
   },
   {
     path: 'admin',

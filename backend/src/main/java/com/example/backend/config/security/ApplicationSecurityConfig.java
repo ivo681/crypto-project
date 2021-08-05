@@ -80,31 +80,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-//        http.csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/users/login", "/users/register").permitAll()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .httpBasic();
-
-//        http.csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/users/login", "/users/register").permitAll()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/")
-//                .loginProcessingUrl("/auth")
-//                .usernameParameter("email")
-//                .passwordParameter("password")
-//                .successHandler(successHandler())
-//                .failureHandler(failureHandler())
-//                .permitAll()
-//                .and()
-//                .logout().permitAll();
-
         http
                 .cors()
                 .and()
@@ -119,10 +94,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/users/login", "/users/register")
                 .anonymous()
-                .antMatchers(HttpMethod.GET, "/market")
-                .authenticated()
-                .antMatchers(HttpMethod.POST, "/api/courses").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/api/logs/**", "/api/users", "/api/roles/**").hasAuthority("ROLE_ADMIN")
+//                .antMatchers(HttpMethod.GET, "/market")
+//                .authenticated()
+//                .antMatchers(HttpMethod.POST, "/api/courses").hasAuthority("ROLE_ADMIN")
+//                .antMatchers("/api/logs/**", "/api/users", "/api/roles/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest()
                 .authenticated();
 

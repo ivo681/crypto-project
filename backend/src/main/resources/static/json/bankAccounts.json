@@ -901,12 +901,30 @@
 	},
 	{
 		"number": 1111222233334444,
-		"firstName": "Smith",
-		"lastName": "John",
+		"firstName": "CryptoMania",
+		"lastName": "CEO",
 		"validFrom": "2020-02-24",
 		"idNumber": 1111111111,
 		"cvv": 111,
-		"balance": 0
+		"balance": 2000000
+	},
+	{
+		"number": 1111111111111111,
+		"firstName": "Tester",
+		"lastName": "One",
+		"validFrom": "2020-02-24",
+		"idNumber": 2222222222,
+		"cvv": 101,
+		"balance": 20000
+	},
+	{
+		"number": 2222222222222222,
+		"firstName": "Tester",
+		"lastName": "Two",
+		"validFrom": "2020-02-24",
+		"idNumber": 3333333333,
+		"cvv": 102,
+		"balance": 0.10
 	}
 
 ]

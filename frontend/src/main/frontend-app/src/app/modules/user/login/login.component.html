@@ -1,0 +1,60 @@
+<section class="login-register-wrapper">
+  <section class="login-register">
+    <form name="login-form"
+          class="form-signin login-register-flex"
+          #f="ngForm"
+          (submit)="f.form.valid && sendLoginRequest()">
+      <img src="/src/main/frontend-app/src/assets/static/img/ecf8a64431fe4fc4aadc37346a88af2a%20(3).png" alt="" />
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <small *ngIf="invalidCredentials"
+             class="form-text bg-danger rounded">
+        Invalid login credentials, please try again</small>
+      <input
+        type="email"
+        id="inputEmail"
+        name="email"
+        [(ngModel)]="model.email"
+        #email="ngModel"
+        [ngClass]="{'is-invalid input-validation-error' : f.submitted && email.invalid}"
+        class="form-control"
+        placeholder="Email address"
+        email
+        required
+        autofocus
+      />
+      <div *ngIf="(f.submitted && email.invalid) || email.touched">
+        <small *ngIf="email.errors?.required || email.errors?.email"
+               class="form-text bg-danger rounded">
+          Please provide a valid email</small>
+
+      </div>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input
+        type="password"
+        id="inputPassword"
+        name="password"
+        [(ngModel)]="model.password"
+        #password="ngModel"
+        [ngClass]="{'is-invalid input-validation-error' : f.submitted && password.invalid}"
+        class="form-control"
+        placeholder="Password"
+        pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@!#$%^&+=])(?=\S+$).{8,}"
+        required
+      />
+      <div *ngIf="(f.submitted && password.invalid) || password.touched">
+        <small *ngIf="(password.errors?.required || password.errors?.pattern) && !invalidCredentials"
+               class="text-light form-text bg-danger rounded">
+          Password must be at least 8 characters long, including: 1 uppercase, 1 lowercase, 1 number, 1 special character</small>
+      </div>
+      <p class="message">Not registered? <a [routerLink]="['../register']">Register</a></p>
+      <p class="popup message" onclick="toggleWindow()">Forgot password?
+        <span class="popuptext" id="myPopup">Relax and try to remember your password :)</span>
+      </p>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" >
+        Sign in
+      </button>
+    </form>
+  </section>
+</section>
+
