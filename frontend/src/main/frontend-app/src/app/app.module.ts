@@ -14,6 +14,9 @@ import {MarketModule} from "./market/market.module";
 import {TokenInterceptor} from "./shared/interceptors/token.interceptor";
 import {WalletModule} from "./wallet/wallet.module";
 import {TransactionModule} from "./transaction/transaction.module";
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import {AdminModule} from "./admin/admin.module";
+import {AdminGuard} from "./core/guards/admin.guard";
 
 @NgModule({
   declarations: [
@@ -21,9 +24,11 @@ import {TransactionModule} from "./transaction/transaction.module";
     HomeComponent,
     AboutComponent,
     NotFoundComponent,
+    UnauthorizedComponent,
   ],
   imports: [
     BrowserModule,
+    AdminModule,
     CoreModule,
     UserModule,
     ProductModule,
@@ -35,6 +40,7 @@ import {TransactionModule} from "./transaction/transaction.module";
     AppRoutingModule
   ],
   providers: [
+    AdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

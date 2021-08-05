@@ -196,10 +196,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderServiceModel getOrderViewModel(Long orderNumber, String name) {
-        Order order = this.orderRepository.
+        Order order= this.orderRepository.
                 findByOrderNumberAndLoggedUserAndStatus(
-                        orderNumber, name, OrderStatusEnum.INCOMPLETE
+                        orderNumber, name, OrderStatusEnum.INCOMPLETE, OrderStatusEnum.DECLINED
                 ).get();
+        if (order == null){
+            return null;
+        }
         OrderServiceModel orderServiceModel = new OrderServiceModel();
         orderServiceModel.setOrderNumber(order.getNumber());
         orderServiceModel.setCoinName(order.getCoin().getName());

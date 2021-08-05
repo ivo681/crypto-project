@@ -53,7 +53,7 @@ public class WalletController {
             sellCoinServiceModel.setOrderNumber(orderNumber);
             return new ResponseEntity<>(sellCoinServiceModel, HttpStatus.OK);
         } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

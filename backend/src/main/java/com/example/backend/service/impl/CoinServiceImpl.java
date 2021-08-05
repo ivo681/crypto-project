@@ -93,10 +93,7 @@ public class CoinServiceImpl implements CoinService {
         String capitalName = name.substring(0, 1).toUpperCase() + name.substring(1);
         Optional<Coin> coin = this.coinRepository.
                 getAvailableCoinDetailsByName(capitalName);
-        if (coin.isPresent()){
             return this.modelMapper.map(coin.get(), CoinServiceModel.class);
-        }
-        throw new CoinNotFoundException();
     }
 
 //    public BigDecimal getAverage(List<BigDecimal> bigDecimals, RoundingMode roundingMode) {

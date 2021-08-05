@@ -16,8 +16,8 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     Optional<Order> findByOrderNumber(Long number);
 
     @Query("SELECT o FROM Order o WHERE o.number=:orderNumber AND o.user.email=:name " +
-            "AND o.orderStatus= :incomplete")
-    Optional<Order> findByOrderNumberAndLoggedUserAndStatus(Long orderNumber, String name, OrderStatusEnum incomplete);
+            "AND (o.orderStatus= :incomplete OR o.orderStatus=:declined)")
+    Optional<Order> findByOrderNumberAndLoggedUserAndStatus(Long orderNumber, String name, OrderStatusEnum incomplete, OrderStatusEnum declined);
 
     @Query("SELECT o FROM Order o WHERE o.number=:orderNumber AND o.orderStatus= :complete")
     Optional<Order> isOrderCompleted(Long orderNumber, OrderStatusEnum complete);

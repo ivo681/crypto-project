@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SellCoinComponent } from './sell-coin.component';
+import { AdminMenuComponent } from './admin-menu.component';
 
-describe('SellCoinComponent', () => {
-  let component: SellCoinComponent;
-  let fixture: ComponentFixture<SellCoinComponent>;
+describe('AdminMenuComponent', () => {
+  let component: AdminMenuComponent;
+  let fixture: ComponentFixture<AdminMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SellCoinComponent ]
+      declarations: [ AdminMenuComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SellCoinComponent);
+    fixture = TestBed.createComponent(AdminMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

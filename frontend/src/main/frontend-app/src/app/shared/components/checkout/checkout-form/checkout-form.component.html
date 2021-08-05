@@ -3,6 +3,15 @@
   >Please do not give your real life bank details</label
   >
   <h4 class="mb-3">Payment</h4>
+  <small *ngIf="noCardFoundWithDetails"
+         class="form-text bg-danger rounded">
+    No bank account was found with the provided details</small>
+  <small *ngIf="insufficientUserBalance"
+         class="form-text bg-danger rounded">
+    Your current balance is insufficient to make this purchase</small>
+  <small *ngIf="insufficientSystemBalance"
+         class="form-text bg-danger rounded">
+    Our payment system is currently under maintenance, your transaction cannot be processed at the moment</small>
   <form name="checkout-form"
         #f="ngForm"
         (submit)="f.form.valid && processRequest()">

@@ -36,7 +36,6 @@ export class CheckoutCartComponent implements OnInit {
     if (this.buy){
       this.buyService.getOrderDetails(Number(this.buyOrderNumber))
         .subscribe((response)=>{
-          alert(this.buyOrderNumber)
           this.order.coinName = response.coinName;
           this.order.coinQuantity = response.coinQuantity;
           this.order.orderNumber = response.orderNumber;
@@ -44,12 +43,15 @@ export class CheckoutCartComponent implements OnInit {
           this.order.coinFee = (response.total / 1.05).toFixed(2);
           this.order.commissionFee = (response.total - (response.total / 1.05)).toFixed(2);
         }, error => {
-          alert("Error")
+          if (error.status == 404){
+            this.router.navigate(['/not-found']);
+          } else {
+          //  server error
+          }
         })
     } else {
       this.sellService.getOwnedCoinDetails(this.coinName)
         .subscribe((response)=>{
-          console.log(response)
           this.sellOrderNumber = response.orderNumber;
           this.redirect.emit(this.sellOrderNumber);
           this.order.orderNumber = response.orderNumber;
@@ -61,7 +63,11 @@ export class CheckoutCartComponent implements OnInit {
             .toFixed(2);
           this.order.total = (Number(this.order.coinFee) - Number(this.order.commissionFee)).toFixed(2);
         }, error => {
-          alert("Error")
+          if (error.status == 404){
+            this.router.navigate(['/not-found']);
+          } else {
+            //  server error
+          }
         })
     }
   }

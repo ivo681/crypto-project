@@ -28,6 +28,6 @@
   </tbody>
 </table>
 <section *ngIf="coinsForView.length < 1" class="none-available">
-<h2 class="">You don't have any bought crypto currencies at the moment</h2>
-
+<h2 *ngIf="!buy" class="text-center">You don't have any crypto currencies at the moment</h2>
+<h2 *ngIf="buy" class="text-center">There are no available crypto currencies at the moment for sale, please excuse us</h2>
 </section>

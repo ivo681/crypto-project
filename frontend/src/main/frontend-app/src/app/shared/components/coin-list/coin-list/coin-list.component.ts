@@ -33,8 +33,6 @@ export class CoinListComponent implements OnInit {
       observable = this.walletService.getOwnedCoins();
     }
     observable.subscribe((response) => {
-        alert("Successful request")
-        // console.log(response);
         this.coins = response;
         if (this.coins){
           for (let coin of this.coins) {

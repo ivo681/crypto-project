@@ -16,6 +16,9 @@ export class CheckoutFormComponent implements OnInit {
   coinUrlEl : string = this.activatedRoute.snapshot.params['coin'];
   @Input() sellOrderNumber?: string;
   @Input() buy? : boolean;
+  noCardFoundWithDetails: boolean = false;
+  insufficientUserBalance: boolean = false;
+  insufficientSystemBalance: boolean = false;
 
   model: PaymentBindingModel = {
     fullName: '',
@@ -41,16 +44,21 @@ export class CheckoutFormComponent implements OnInit {
   }
 
   sendPaymentRequest() : void {
-    console.log(this.model)
+    this.noCardFoundWithDetails = false;
+    this.insufficientUserBalance = false;
     this.buyService.makePurchase(this.model, this.orderNumber)
       .subscribe((response)=>{
-        alert("Success")
-        console.log(response)
         this.router.navigate(["/market/confirmation/" + response])
       }, error => {
-        debugger
-        alert("Error")
-        console.log(error.status)
+        if (error.status == 400){
+          this.router.navigate(['/not-found'])
+        } else if (error.status == 404){
+          this.noCardFoundWithDetails = true;
+        } else if (error.status == 417){
+          this.insufficientUserBalance = true;
+        } else {
+        //server error
+        }
       })
   }
 
@@ -58,13 +66,17 @@ export class CheckoutFormComponent implements OnInit {
     // @ts-ignore
     this.sellService.makeSell(this.model, this.sellOrderNumber)
       .subscribe((response)=>{
-        alert("Success")
-        console.log(response)
         this.router.navigate(["/wallet/confirmation/" + response])
       }, error => {
-        debugger
-        alert("Error")
-        console.log(error.status)
+        if (error.status == 400){
+          this.router.navigate(['/not-found'])
+        } else if (error.status == 404){
+          this.noCardFoundWithDetails = true;
+        } else if (error.status == 417){
+          this.insufficientSystemBalance = true;
+        } else {
+          //server error
+        }
       })
   }
 

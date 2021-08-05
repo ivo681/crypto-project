@@ -72,22 +72,16 @@ export class UserService {
       'accessToken',
       response.accessToken
     );
-
     this.user = response.user;
     this.localStorage.setItem('<USER>', JSON.stringify(response.user));
   }
 
   register(formData: UserRegisterBindingModel) {
     return this.httpClient.post<any>("http://localhost:8080/users/register", formData);
-    // return this.httpClient.post(REGISTER_URL, formData, {
-    //   reportProgress: true,
-    //   observe: 'events'
-    // });
   }
 
   logout(): void {
     this.user = undefined;
-    // this.localStorage.removeItem('<USER>');
     this.localStorage.clear();
     this.renderer?.removeClass(document.body, "logged");
     this.renderer?.addClass(document.body, "not-logged")

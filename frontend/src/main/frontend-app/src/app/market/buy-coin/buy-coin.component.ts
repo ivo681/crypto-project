@@ -44,11 +44,8 @@ export class BuyCoinComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    // this.coinName = this.activatedRoute.snapshot.params['coin'];
     this.model.name = this.coinName;
     this.marketService.getAvailableCoinDetails(this.coinName).subscribe((response) => {
-        alert("Successful request")
-        // console.log(response);
         this.coin = response;
         this.coin.startPriceChange = this.analyticalService.calculateChangePercentage(
           this.coin.initialPrice, this.coin.currentPrice);
@@ -72,12 +69,10 @@ export class BuyCoinComponent implements OnInit {
 
   sendOrderRequest() : void {
     this.marketService.placeOrder(this.model).subscribe((response) => {
-      alert("Successfully placed order");
       let orderNumber : number = response;
       this.router.navigate(["/market/checkout/" + orderNumber])
     }, error => {
       this.unsuccessfulOrder = true;
-      alert("Error")
     });
   }
 }

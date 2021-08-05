@@ -39,7 +39,6 @@ public class UsersController {
     public ResponseEntity<Object> sendLoginDetails(
             @Valid @RequestBody UserLoginBindingModel userLoginBindingModel, Principal principal){
         JwtAuthenticationResponse response = this.userService.login(userLoginBindingModel);
-
         return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
     }
 
@@ -47,23 +46,13 @@ public class UsersController {
     public ResponseEntity<Object> sendRegistrationDetails(
             @Valid @RequestBody UserRegisterBindingModel userRegisterBindingModel,
             BindingResult bindingResult){
-        Map<String, List<String>> errors = new HashMap<>();
         if (bindingResult.hasErrors() ||
                 (Period.between(userRegisterBindingModel.getDateOfBirth(), LocalDate.now()).getYears() < 18)){
             if (userRegisterBindingModel.getDateOfBirth() != null &&
                     Period.between(userRegisterBindingModel.getDateOfBirth(), LocalDate.now()).getYears() < 18) {
-//                bindingResult.rejectValue("dateOfBirth", "error.userRegisterBindingModel", "You must be at least 18 years old to register");
-                return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
-            for (FieldError error:bindingResult.getFieldErrors()){
-                if (!errors.containsKey(error.getField())){
-                    errors.put(error.getField(), new ArrayList<>());
-                }
-                List<String> messages = errors.get(error.getField());
-                messages.add(error.getDefaultMessage());
-                errors.put(error.getField(), messages);
-            }
-            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         if (this.userService.emailExists(userRegisterBindingModel.getEmail())){

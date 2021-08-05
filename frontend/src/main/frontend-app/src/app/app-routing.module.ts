@@ -6,6 +6,9 @@ import {ProductsComponent} from "./product/products/products.component";
 import {LoginComponent} from "./user/login/login.component";
 import {AuthActivate} from "./core/guards/auth.activate";
 import {MarketComponent} from "./market/market/market.component";
+import {UnauthorizedComponent} from "./unauthorized/unauthorized.component";
+import {AdminGuard} from "./core/guards/admin.guard";
+import {AdminMenuComponent} from "./admin/admin-menu/admin-menu.component";
 
 const routes : Routes = [
   {
@@ -31,6 +34,21 @@ const routes : Routes = [
     data: {
       authenticationRequired: false,
       authenticationFailureRedirectUrl: '/',
+    }
+  }
+  ,{
+    path:'unauthorized',
+    pathMatch: 'full',
+    component: UnauthorizedComponent,
+  },
+  {
+    path: 'admin',
+    pathMatch: 'full',
+    component: AdminMenuComponent,
+    canActivate:[AuthActivate, AdminGuard],
+    data: {
+      authenticationRequired: true,
+      // authenticationFailureRedirectUrl: '/',
     }
   },
   {

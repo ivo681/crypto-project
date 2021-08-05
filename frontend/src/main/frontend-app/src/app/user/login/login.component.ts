@@ -17,11 +17,6 @@ export class LoginComponent implements OnInit {
     password: '',
     id: ''
   };
-  modelError: UserLoginBindingModel = {
-    email: '',
-    password: '',
-    id: ''
-  }
   invalidCredentials: boolean = false;
 
   errors: any;
@@ -38,7 +33,6 @@ export class LoginComponent implements OnInit {
           this.userService.setLoggedInDetails(response);
           this.router.navigate(["/"])
         }, error => {
-        debugger
           this.model.password = '';
           this.invalidCredentials = true;
       });

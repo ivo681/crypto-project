@@ -10,6 +10,9 @@
       <small *ngIf="existingEmail"
              class="form-text bg-danger rounded">
         There is already a user with this email address, please use another one</small>
+      <small *ngIf="invalidInput"
+             class="form-text bg-danger rounded">
+        You cannot register with invalid data</small>
       <input
         type="email"
         name="email"

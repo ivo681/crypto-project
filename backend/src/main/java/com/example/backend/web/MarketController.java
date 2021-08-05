@@ -37,11 +37,12 @@ public class MarketController {
 
     @GetMapping("/buy/{name}")
     public ResponseEntity<Object> getAvailableCoinDetailsByName(@PathVariable String name) throws CoinNotFoundException {
+        try {
         CoinServiceModel serviceModel = this.coinService.getAvailableCoinDetailsByName(name);
-        if (serviceModel == null){
+            return new ResponseEntity(serviceModel, HttpStatus.OK);
+        } catch (Exception e){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(serviceModel, HttpStatus.OK);
     }
 
     @PostMapping("/order")
@@ -66,7 +67,7 @@ public class MarketController {
                     orderNumber, principal.getName());
             return new ResponseEntity<>(orderServiceModel, HttpStatus.OK);
         } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
