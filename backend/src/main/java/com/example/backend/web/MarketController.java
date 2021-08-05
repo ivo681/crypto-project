@@ -87,7 +87,7 @@ public class MarketController {
                 if (this.bankAccountService.hasEnoughBalance(orderNumber,
                         paymentBindingModel.getCardNumber())){
                     Long successfulTransaction = this.bankAccountService.createSuccessfulTransaction(
-                            orderNumber, paymentBindingModel.getCardNumber()
+                            orderNumber, paymentBindingModel.getCardNumber(), OrderTypeEnum.PURCHASE
                     );
                     return new ResponseEntity<>(successfulTransaction, HttpStatus.OK);
                 } else {

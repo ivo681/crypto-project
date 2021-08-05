@@ -74,7 +74,7 @@ public class WalletController {
                 if (this.bankAccountService.canPayoutUsers(totalSum,
                         "1111222233334444")){
                     this.bankAccountService.payoutUserAndBlockAmount(paymentBindingModel.getCardNumber(), totalSum);
-                    Long successfulTransaction = this.bankAccountService.createSuccessfulTransaction(orderNumber, paymentBindingModel.getCardNumber());
+                    Long successfulTransaction = this.bankAccountService.createSuccessfulTransaction(orderNumber, paymentBindingModel.getCardNumber(), OrderTypeEnum.SALE);
                     return new ResponseEntity<>(successfulTransaction, HttpStatus.OK);
                 } else {
                     this.bankAccountService.createUnsuccessfulTransaction(orderNumber, paymentBindingModel.getCardNumber());

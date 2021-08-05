@@ -1,5 +1,7 @@
 package com.example.backend.service;
 
+import com.example.backend.model.enums.OrderTypeEnum;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +15,7 @@ public interface BankAccountService {
 
     Long createUnsuccessfulTransaction(Long orderId, String number);
 
-    Long createSuccessfulTransaction(Long orderId, String number);
+    Long createSuccessfulTransaction(Long orderId, String number, OrderTypeEnum type);
 
     void removeBlockedAmountsAndTransferToShop();
 

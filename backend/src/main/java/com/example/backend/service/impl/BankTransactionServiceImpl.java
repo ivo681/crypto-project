@@ -3,6 +3,7 @@ package com.example.backend.service.impl;
 import com.example.backend.model.BankAccount;
 import com.example.backend.model.BankTransaction;
 import com.example.backend.model.enums.OrderStatusEnum;
+import com.example.backend.model.enums.OrderTypeEnum;
 import com.example.backend.model.enums.TransactionStatusEnum;
 import com.example.backend.repository.BankAccountRepository;
 import com.example.backend.repository.BankTransactionRepository;
@@ -55,11 +56,13 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 //    }
 
     @Override
-    public Long createSuccessfulTransaction(Long orderId, String number) {
-        BankAccount bankAccount = this.bankAccountRepository.findByNumber(number).get();
+    public Long createSuccessfulTransaction(Long orderId, String number, OrderTypeEnum type) {
         BigDecimal orderTotal = this.orderService.getOrderTotal(orderId);
-        bankAccount.setBlockedAmount(bankAccount.getBlockedAmount().add(orderTotal));
-        bankAccount = this.bankAccountRepository.save(bankAccount);
+        BankAccount bankAccount = this.bankAccountRepository.findByNumber(number).get();
+        if (type.equals(OrderTypeEnum.PURCHASE)){
+            bankAccount.setBlockedAmount(bankAccount.getBlockedAmount().add(orderTotal));
+            bankAccount = this.bankAccountRepository.save(bankAccount);
+        }
         BankTransaction bankTransaction = new BankTransaction();
         bankTransaction.setBankAccount(bankAccount);
         bankTransaction.setNumber(generateNumber());

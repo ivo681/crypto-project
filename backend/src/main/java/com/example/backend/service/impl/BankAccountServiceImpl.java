@@ -2,6 +2,7 @@ package com.example.backend.service.impl;
 
 import com.example.backend.model.BankAccount;
 import com.example.backend.model.dtos.BankAccountSeedDto;
+import com.example.backend.model.enums.OrderTypeEnum;
 import com.example.backend.repository.BankAccountRepository;
 import com.example.backend.service.BankAccountService;
 import com.example.backend.service.BankTransactionService;
@@ -99,7 +100,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public Long createSuccessfulTransaction(Long orderId, String number) {
-        return this.bankTransactionService.createSuccessfulTransaction(orderId, number);
+    public Long createSuccessfulTransaction(Long orderId, String number, OrderTypeEnum type) {
+        return this.bankTransactionService.createSuccessfulTransaction(orderId, number, type);
     }
 }
