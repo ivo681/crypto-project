@@ -13,6 +13,10 @@ export class HeaderComponent {
     return this.userService.isLogged;
   }
 
+  get isAdmin(): boolean{
+    return this.userService.isAdmin;
+  }
+
   constructor(private userService: UserService,
               private router: Router) { }
 

@@ -43,13 +43,21 @@ ul.home-logged-menu{
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
-  width: 80%;
+  width: 100%;
 }
 
 .home-logged-wrapper{
   margin: 100px auto;
   backdrop-filter: blur(2px);
   color: white;
+}
+
+.home-logged-menu-item{
+  margin-right: 10px;
+}
+
+.home-logged-menu-item:last-child{
+  margin-right: 0px;
 }
 
 

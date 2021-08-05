@@ -13,6 +13,10 @@ export class HomeComponent implements OnInit {
     return this.userService.isLogged;
   }
 
+  get isAdmin(): boolean{
+    return this.userService.isAdmin;
+  }
+
   get userEmail(): string{
     if (this.isLogged){
       return this.userService.userEmail;

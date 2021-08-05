@@ -18,11 +18,12 @@
         [ngClass]="{'is-invalid input-validation-error' : f.submitted && email.invalid}"
         class="form-control"
         placeholder="Email address"
+        email
         required
         autofocus
       />
-      <div *ngIf="(f.submitted && email.invalid) || modelError.email">
-        <small *ngIf="email.errors?.required || email.errors?.email || modelError.email"
+      <div *ngIf="(f.submitted && email.invalid) || email.touched">
+        <small *ngIf="email.errors?.required || email.errors?.email"
                class="form-text bg-danger rounded">
           Please provide a valid email</small>
       </div>
@@ -33,17 +34,17 @@
         [(ngModel)]="model.password"
         #password="ngModel"
         [ngClass]="{'is-invalid input-validation-error' : f.submitted && password.invalid}"
+        (change)="checkPasswordsMatch()"
         class="form-control"
         placeholder="Password"
+        pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@!#$%^&+=])(?=\S+$).{8,}"
         required
       />
-      <div *ngIf="(f.submitted && password.invalid) || modelError.password">
-<!--        <small *ngIf="password.errors?.required"-->
-<!--               class="text-light form-text bg-danger rounded">-->
-<!--          Password field cannot be empty</small>-->
-        <small *ngFor="let err of modelError.password"
+      <div *ngIf="(f.submitted && password.invalid) || password.touched">
+        <small *ngIf="(password.errors?.required || password.errors?.pattern)
+        && (!existingEmail && !notOldEnough)"
                class="text-light form-text bg-danger rounded">
-          {{err}}</small>
+          Password must be at least 8 characters long, including: 1 uppercase, 1 lowercase, 1 number, 1 special character</small>
       </div>
       <!-- <label for="confirmPassword">Confirm password</label> -->
       <input
@@ -52,18 +53,22 @@
         [(ngModel)]="model.confirmPassword"
         #confirmPassword="ngModel"
         [ngClass]="{'is-invalid input-validation-error' : f.submitted && confirmPassword.invalid}"
+        (change)="checkPasswordsMatch()"
         class="form-control"
         placeholder="Confirm password"
+        pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@!#$%^&+=])(?=\S+$).{8,}"
         required
       />
-      <div *ngIf="(f.submitted && confirmPassword.invalid) || modelError.confirmPassword">
-<!--        <small *ngIf="confirmPassword.errors?.required"-->
-<!--               class="text-light form-text bg-danger rounded">-->
-<!--          Password field cannot be empty</small>-->
-        <small *ngFor="let err of modelError.confirmPassword"
+      <div *ngIf="(f.submitted && confirmPassword.invalid) || confirmPassword.touched">
+        <small *ngIf="(confirmPassword.errors?.required || confirmPassword.errors?.pattern)
+        && (!existingEmail && !notOldEnough)"
                class="text-light form-text bg-danger rounded">
-          {{err}}</small>
+          Password must be at least 8 characters long, including: 1 uppercase, 1 lowercase, 1 number, 1 special character</small>
       </div>
+        <small *ngIf="passwordsDoNotMatch"
+               class="text-light form-text bg-danger rounded">
+          Passwords do not match
+        </small>
       <label for="dateOfBirth">Date of birth</label>
       <input
         type="date"
@@ -73,16 +78,15 @@
         #dateOfBirth="ngModel"
         [ngClass]="{'is-invalid input-validation-error' : f.submitted && dateOfBirth.invalid}"
         class="form-control"
-        placeholder="Password"
         required
       />
-      <div *ngIf="(f.submitted && dateOfBirth.invalid) || modelError.dateOfBirth">
+      <div *ngIf="(f.submitted && dateOfBirth.invalid) || dateOfBirth.touched || notOldEnough">
         <small *ngIf="dateOfBirth.errors?.required"
                class="text-light form-text bg-danger rounded">
           Date of birth field cannot be empty</small>
-        <small *ngFor="let err of modelError.dateOfBirth"
+        <small *ngIf="notOldEnough"
                class="text-light form-text bg-danger rounded">
-          {{err}}</small>
+          You must be at least 18 years old to register</small>
       </div>
       <p class="message">Already registered?
         <a [routerLink]="['../login']">Login</a></p>

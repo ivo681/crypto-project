@@ -1,0 +1,94 @@
+<div class="crypto card flex-md-row mb-4 box-shadow h-md-250">
+  <div class="crypto-logo">
+    <h2 class="display-6 font-weight-bold">
+      {{coin.name}} Coin
+    </h2>
+    <small *ngIf="unsuccessfulOrder"
+           class="form-text bg-danger rounded">
+      Your order could not be processed</small>
+    <img
+      class="
+              coin-wrapper-card-img
+              card-img-right
+              flex-auto
+              d-none d-md-block
+            "
+      src="../../../assets/static/img/coins/gifs/{{coinName}}.gif"
+      alt="Coin image cap"
+    />
+  </div>
+  <div class="crypto-stats">
+    <section class="crypto-stats-week">
+      <h4>From start</h4>
+        <article class="crypto-stats-week-headings">
+          <span>Price</span>
+          <span>Average change%</span>
+        </article>
+        <article class="crypto-stats-week-numbers">
+          <span>BGN {{coin.initialPrice}}</span>
+          <span class="{{coin.startClass}}">{{coin.startPriceChange}}</span>
+        </article>
+    </section>
+    <section class="crypto-stats-yesterday">
+      <section class="crypto-stats-week">
+        <h4>From yesterday</h4>
+          <article class="crypto-stats-week-headings">
+            <span>Price</span>
+            <span>Average change%</span>
+          </article>
+          <article class="crypto-stats-week-numbers">
+            <span>BGN {{coin.yesterdaysAvgPrice}}</span>
+            <span class="{{coin.dailyClass}}">{{coin.dailyChange}}</span>
+          </article>
+      </section>
+    </section>
+    <section class="crypto-stats-today">
+      <section class="crypto-stats-week">
+        <h4>From last hour</h4>
+          <article class="crypto-stats-week-headings">
+            <span>Price</span>
+            <span>Average change%</span>
+          </article>
+          <article class="crypto-stats-week-numbers">
+            <span>BGN {{coin.previousPrice}}</span>
+            <span class="{{coin.hourlyClass}}">{{coin.hourlyChange}}</span>
+          </article>
+      </section>
+    </section>
+  </div>
+  <div class="crypto-purchase">
+    <div class="form-group">
+      <h4 class="font-weight-bold">
+        Current Price
+      </h4>
+      <span>BGN {{coin.currentPrice}}</span>
+    </div>
+
+    <form name="buy-form"
+          #f="ngForm"
+          (submit)="f.form.valid && sendOrderRequest()">
+    <div class="form-group">
+      <label for="formGroupExampleInput">Number of coins</label>
+      <input name="quantity"
+              [(ngModel)]="model.quantity"
+             #quantity="ngModel" type="number" min="1" max="{{coin.quantity}}" step="1"
+             (change)="changeTotalAmount(quantity.value)"
+             oninput="this.value = Math.round(this.value);"
+             class="form-control" id="formGroupExampleInput"
+             required placeholder="1">
+      <div *ngIf="(f.submitted && quantity.invalid) || quantity.touched">
+        <small *ngIf="quantity.errors?.required || quantity.errors?.min
+                || quantity.errors?.max"
+               class="form-text bg-danger rounded">
+          Please choose a quantity between 1 and {{coin.quantity}}</small>
+      </div>
+    </div>
+
+    <div class="order-total form-group">
+      <label for="formGroupExampleInput">Total: BGN {{total}}</label>
+      <button type="submit" class="btn btn-success">Buy Now</button>
+    </div>
+    </form>
+
+  </div>
+</div> -->

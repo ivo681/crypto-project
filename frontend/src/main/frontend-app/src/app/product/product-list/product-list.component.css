@@ -10,5 +10,5 @@ ul.product-list{
 }
 
 ul.product-list > app-product-list-item{
-  flex-basis: 20%;
+  flex-basis: 16%;
 }

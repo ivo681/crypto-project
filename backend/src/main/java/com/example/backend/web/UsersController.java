@@ -3,7 +3,9 @@ package com.example.backend.web;
 import com.example.backend.config.security.JwtAuthenticationResponse;
 import com.example.backend.model.binding.UserLoginBindingModel;
 import com.example.backend.model.binding.UserRegisterBindingModel;
+import com.example.backend.model.service.OperationServiceModel;
 import com.example.backend.model.service.UserRegisterServiceModel;
+import com.example.backend.service.OrderService;
 import com.example.backend.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpHeaders;
@@ -25,17 +27,13 @@ import java.util.*;
 public class UsersController {
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final OrderService orderService;
 
-    public UsersController(ModelMapper modelMapper, UserService userService) {
+    public UsersController(ModelMapper modelMapper, UserService userService, OrderService orderService) {
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.orderService = orderService;
     }
-
-//    @GetMapping("/login")
-//    public void test(@RequestBody UserLoginBindingModel userLoginBindingModel){
-//        System.out.println(userLoginBindingModel.getEmail());
-//        System.out.println("success");
-//    }
 
     @PostMapping(value = "/login")
     public ResponseEntity<Object> sendLoginDetails(
@@ -54,7 +52,8 @@ public class UsersController {
                 (Period.between(userRegisterBindingModel.getDateOfBirth(), LocalDate.now()).getYears() < 18)){
             if (userRegisterBindingModel.getDateOfBirth() != null &&
                     Period.between(userRegisterBindingModel.getDateOfBirth(), LocalDate.now()).getYears() < 18) {
-                bindingResult.rejectValue("dateOfBirth", "error.userRegisterBindingModel", "You must be at least 18 years old to register");
+//                bindingResult.rejectValue("dateOfBirth", "error.userRegisterBindingModel", "You must be at least 18 years old to register");
+                return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
             }
             for (FieldError error:bindingResult.getFieldErrors()){
                 if (!errors.containsKey(error.getField())){
@@ -75,17 +74,10 @@ public class UsersController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-//    @RequestMapping("/login")
-//    public boolean login(@RequestBody User user) {
-//        return
-//                user.getEmail().equals("user@abv.bg") && user.getPassword().equals("password");
-//    }
 
-//    @RequestMapping("/user")
-//    public Principal user(HttpServletRequest request) {
-//        String authToken = request.getHeader("Authorization")
-//                .substring("Basic".length()).trim();
-//        return () ->  new String(Base64.getDecoder()
-//                .decode(authToken)).split(":")[0];
-//    }
+    @GetMapping("/operations")
+    public ResponseEntity<Object> getUserOperations(Principal principal){
+        List<OperationServiceModel> operationServiceModels = this.orderService.getUserOperations(principal.getName());
+        return new ResponseEntity(operationServiceModels, HttpStatus.OK);
+    }
 }

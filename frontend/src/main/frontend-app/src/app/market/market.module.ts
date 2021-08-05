@@ -1,20 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MarketComponent } from './market/market.component';
-import { MarketListComponent } from './market-list/market-list.component';
-import { MarketListItemComponent } from './market-list-item/market-list-item.component';
+import {RouterModule} from "@angular/router";
+import {MarketRoutingModule} from "./market-routing.module";
+import { BuyCoinComponent } from './buy-coin/buy-coin.component';
+import {FormsModule} from "@angular/forms";
+import { CheckoutComponent } from './checkout/checkout/checkout.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 
 @NgModule({
   declarations: [
     MarketComponent,
-    MarketListComponent,
-    MarketListItemComponent
+    BuyCoinComponent,
+    CheckoutComponent,
+    ConfirmationComponent
   ],
-  imports: [
-    CommonModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        MarketRoutingModule,
+        FormsModule
+    ],
   exports: [
     MarketComponent
   ]

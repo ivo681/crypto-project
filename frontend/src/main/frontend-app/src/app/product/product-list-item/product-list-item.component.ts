@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   '../product-list/product-list.component.css']
 })
 export class ProductListItemComponent implements OnInit {
-  @Input() coin: string | undefined;
+  @Input() product: string | undefined;
 
   constructor() { }
 

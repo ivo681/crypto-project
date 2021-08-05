@@ -12,3 +12,14 @@
   text-align:center;
 }
 
+.about-us-button{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.about-us-button > span{
+  margin-right: 8px;
+}
+

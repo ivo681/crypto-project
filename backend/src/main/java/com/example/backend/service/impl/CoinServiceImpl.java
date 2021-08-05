@@ -1,11 +1,15 @@
 package com.example.backend.service.impl;
 
+import com.example.backend.exceptions.CoinNotFoundException;
 import com.example.backend.model.Coin;
 import com.example.backend.model.dtos.CoinSeedDto;
+import com.example.backend.model.service.CoinServiceModel;
 import com.example.backend.repository.CoinRepository;
 import com.example.backend.service.CoinService;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,10 +17,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CoinServiceImpl implements CoinService {
@@ -55,7 +57,10 @@ public class CoinServiceImpl implements CoinService {
             coin.setPreviousPrice(coin.getCurrentPrice());
             double randomValue = 0.1 + (2 - 0.1) * random.nextDouble();
             BigDecimal newCurrentPrice = coin.getCurrentPrice().multiply(BigDecimal.valueOf(randomValue));
-            coin.setCurrentPrice(newCurrentPrice);
+            if (newCurrentPrice.doubleValue() > 0.1){
+                coin.setCurrentPrice(newCurrentPrice);
+            }
+            this.coinRepository.save(coin);
         }
     }
 
@@ -74,6 +79,24 @@ public class CoinServiceImpl implements CoinService {
                 this.coinRepository.save(coin);
             }
         }
+    }
+
+    @Override
+    public List<CoinServiceModel> getAllAvailableCoins() {
+        return this.coinRepository.getAllAvailableCoins().stream().map(
+                c -> this.modelMapper.map(c, CoinServiceModel.class)
+        ).collect(Collectors.toList());
+    }
+
+    @Override
+    public CoinServiceModel getAvailableCoinDetailsByName(String name) throws CoinNotFoundException {
+        String capitalName = name.substring(0, 1).toUpperCase() + name.substring(1);
+        Optional<Coin> coin = this.coinRepository.
+                getAvailableCoinDetailsByName(capitalName);
+        if (coin.isPresent()){
+            return this.modelMapper.map(coin.get(), CoinServiceModel.class);
+        }
+        throw new CoinNotFoundException();
     }
 
 //    public BigDecimal getAverage(List<BigDecimal> bigDecimals, RoundingMode roundingMode) {

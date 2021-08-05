@@ -19,7 +19,7 @@ public class UserPrincipal implements UserDetails {
     private LocalDate dateOfBirth;
     @JsonIgnore
     private String password;
-    @JsonIgnore
+//    @JsonIgnore
     private Collection<? extends GrantedAuthority> authorities;
 
     private UserPrincipal(String id,

@@ -56,10 +56,9 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public boolean hasEnoughBalance(String orderId, String number) {
-//        BigDecimal orderTotal = this.orderService.getOrderTotal(orderId);
-//        return this.bankAccountRepository.checkIfAccountHasEnoughBalance(number, orderTotal).isPresent();
-        return false;
+    public boolean hasEnoughBalance(Long orderId, String number) {
+        BigDecimal orderTotal = this.orderService.getOrderTotal(orderId);
+        return this.bankAccountRepository.checkIfAccountHasEnoughBalance(number, orderTotal).isPresent();
     }
 
     //This is only for display, should be in separate Banking application
@@ -80,12 +79,27 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public String createUnsuccessfulTransaction(String orderId, String number) {
+    public boolean canPayoutUsers(BigDecimal totalSum, String cardNumber) {
+        return this.bankAccountRepository.checkIfAccountHasEnoughBalance(cardNumber, totalSum).isPresent();
+    }
+
+    @Override
+    public void payoutUserAndBlockAmount(String cardNumber, BigDecimal totalSum) {
+        BankAccount bankAccount = this.bankAccountRepository.findByNumber(cardNumber).get();
+        bankAccount.setBalance(bankAccount.getBalance().add(totalSum));
+        this.bankAccountRepository.save(bankAccount);
+        BankAccount ownerAccount = this.bankAccountRepository.findByNumber("1111222233334444").get();
+        ownerAccount.setBalance(ownerAccount.getBalance().subtract(totalSum));
+        this.bankAccountRepository.save(ownerAccount);
+    }
+
+    @Override
+    public Long createUnsuccessfulTransaction(Long orderId, String number) {
         return this.bankTransactionService.createUnsuccessfulTransaction(orderId, number);
     }
 
     @Override
-    public String createSuccessfulTransaction(String orderId, String number) {
+    public Long createSuccessfulTransaction(Long orderId, String number) {
         return this.bankTransactionService.createSuccessfulTransaction(orderId, number);
     }
 }

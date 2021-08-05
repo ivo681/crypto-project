@@ -1,0 +1,6 @@
+<section class="buy-wrapper">
+  <section class="checkout">
+    <app-checkout-cart [buy]="false" (redirect)="parentData=$event"></app-checkout-cart>
+    <app-checkout-form [buy]="false" [sellOrderNumber]="parentData"></app-checkout-form>
+  </section>
+</section>

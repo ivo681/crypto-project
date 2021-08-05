@@ -1,0 +1,98 @@
+<section class="checkout-form">
+  <label class="text-danger"
+  >Please do not give your real life bank details</label
+  >
+  <h4 class="mb-3">Payment</h4>
+  <form name="checkout-form"
+        #f="ngForm"
+        (submit)="f.form.valid && processRequest()">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="fullName">Name on card</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fullName"
+          name="fullName"
+          [(ngModel)]="model.fullName"
+          #fullName="ngModel"
+          placeholder="Full name"
+          required minlength="5"
+        />
+        <small *ngIf="!(f.submitted || fullName.touched)">Full name as displayed on card</small>
+        <div *ngIf="(f.submitted && fullName.invalid) || fullName.touched">
+          <small *ngIf="fullName.errors?.required || fullName.errors?.minlength"
+                 class="form-text bg-danger rounded">
+            Full name length should be at least 5 characters</small>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="cardNumber">Credit card number</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cardNumber"
+          name="cardNumber"
+          [(ngModel)]="model.cardNumber"
+          #cardNumber="ngModel"
+          placeholder="xxxx-xxxx-xxxx-xxxx"
+          minlength="16" maxlength="16"
+          pattern="[0-9]{16}"
+          required
+        />
+
+        <div *ngIf="(f.submitted && cardNumber.invalid) || cardNumber.touched">
+          <small *ngIf="cardNumber.errors?.required || cardNumber.errors?.minlength
+                || cardNumber.errors?.maxlength || cardNumber.errors?.pattern"
+                 class="form-text bg-danger rounded">
+            Please enter a valid 16-digit card number</small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="validTo">Expiration</label>
+        <input class="form-control"
+               id="validTo"
+               name="validTo"
+               [(ngModel)]="model.validTo"
+               #validTo="ngModel"
+               minlength="5" maxlength='5'
+               placeholder="MM/YY" type="text"
+               required
+               onkeyup="formatString(event);">
+        <div *ngIf="(f.submitted && validTo.invalid) || validTo.touched">
+          <small *ngIf="validTo.errors?.required || validTo.errors?.minlength
+                || validTo.errors?.maxlength"
+                 class="form-text bg-danger rounded">
+            Please enter a valid expiration period</small>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="cvv">CVV</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cvv"
+          name="cvv"
+          [(ngModel)]="model.cvv"
+          #cvv="ngModel"
+          minlength="3" maxlength='3'
+          placeholder="xxx"
+          required
+          pattern="[0-9]{3}"
+        />
+        <div *ngIf="(f.submitted && cvv.invalid) || cvv.touched">
+          <small *ngIf="cvv.errors?.required || cvv.errors?.minlength
+                || cvv.errors?.maxlength || cvv.errors?.pattern"
+                 class="form-text bg-danger rounded">
+            Please enter a valid 3-digit CVV code</small>
+        </div>
+      </div>
+    </div>
+    <hr class="mb-4" />
+    <button class="btn btn-success btn-lg btn-block" type="submit">
+      Complete purchase
+    </button>
+  </form>
+</section>

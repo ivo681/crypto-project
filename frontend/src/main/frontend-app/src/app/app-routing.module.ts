@@ -16,7 +16,12 @@ const routes : Routes = [
   {
     path:'about-us',
     pathMatch: 'full',
-    component: AboutComponent
+    component: AboutComponent,
+    canActivate: [AuthActivate],
+    data: {
+      authenticationRequired: false,
+      authenticationFailureRedirectUrl: '/',
+    }
   },
   {
     path:'products',
@@ -29,17 +34,7 @@ const routes : Routes = [
     }
   },
   {
-    path: 'market',
-    pathMatch: 'full',
-    component: MarketComponent,
-    canActivate: [AuthActivate],
-    data: {
-      authenticationRequired: true,
-      authenticationFailureRedirectUrl: '/',
-    }
-  },
-  {
-    path:'**',
+    path: '**' || 'not-found',
     component: NotFoundComponent
   }
 ]

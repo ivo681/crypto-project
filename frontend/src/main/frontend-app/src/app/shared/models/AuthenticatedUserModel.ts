@@ -3,6 +3,6 @@ export class AuthenticatedUserModel {
     public id: string,
     public username: string,
     public token: string,
-    public authorities: string[]
+    public authorities: {}[]
   ) {}
 }

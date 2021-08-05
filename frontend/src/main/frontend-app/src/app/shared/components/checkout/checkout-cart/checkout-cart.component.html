@@ -1,0 +1,42 @@
+<section class="checkout-cart">
+  <div class="order-md-2 mb-4">
+    <h5 class="justify-content-between align-items-center mb-3">
+      <p>Order No: {{order.orderNumber}}</p>
+      <p *ngIf="!buy">Your payout summary</p>
+    </h5>
+    <ul class="list-group mb-3">
+      <li
+        class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    lh-condensed
+                  "
+      >
+        <div>
+          <h6 class="my-0">{{order.coinName}} coin</h6>
+          <small class="text-muted">Quantity: {{order.coinQuantity}}</small>
+        </div>
+        <span class="text-muted">BGN {{order.coinFee}}</span>
+      </li>
+      <li
+        class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    bg-light
+                  "
+      >
+        <div class="text-success">
+          <h6 class="my-0">Commission fee</h6>
+          <small>5% of total sum</small>
+        </div>
+        <span class="text-success">BGN {{order.commissionFee}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Total</span>
+        <strong>BGN {{order.total}}</strong>
+      </li>
+    </ul>
+  </div>
+</section>

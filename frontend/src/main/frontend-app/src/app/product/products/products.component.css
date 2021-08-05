@@ -5,3 +5,7 @@
 .home-wrapper-card > h1{
   text-align: center;
 }
+
+.home-wrapper{
+  width: 100% !important;
+}

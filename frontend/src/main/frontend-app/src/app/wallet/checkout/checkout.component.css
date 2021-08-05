@@ -1,0 +1,30 @@
+.buy{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buy-wrapper{
+  width: 100%;
+  margin: 40px auto;
+}
+
+.checkout{
+  background: transparent !important;
+  backdrop-filter: blur(100px);
+  color: white;
+  font-weight: bolder;
+  font-size: 18px;
+  text-align: center;
+  table-layout:fixed;
+  border: 1px solid white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+app-checkout-cart{
+  width: 35%;
+  margin-right: 30px;
+}

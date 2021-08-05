@@ -2,6 +2,7 @@ package com.example.backend.service.impl;
 
 import com.example.backend.model.BankAccount;
 import com.example.backend.model.BankTransaction;
+import com.example.backend.model.enums.OrderStatusEnum;
 import com.example.backend.model.enums.TransactionStatusEnum;
 import com.example.backend.repository.BankAccountRepository;
 import com.example.backend.repository.BankTransactionRepository;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 @Service
@@ -56,31 +55,33 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 //    }
 
     @Override
-    public String createSuccessfulTransaction(String orderId, String number) {
+    public Long createSuccessfulTransaction(Long orderId, String number) {
         BankAccount bankAccount = this.bankAccountRepository.findByNumber(number).get();
-//        BigDecimal orderTotal = this.orderService.getOrderTotal(orderId);
-//        bankAccount.setBlockedAmount(bankAccount.getBlockedAmount().add(orderTotal));
+        BigDecimal orderTotal = this.orderService.getOrderTotal(orderId);
+        bankAccount.setBlockedAmount(bankAccount.getBlockedAmount().add(orderTotal));
         bankAccount = this.bankAccountRepository.save(bankAccount);
         BankTransaction bankTransaction = new BankTransaction();
         bankTransaction.setBankAccount(bankAccount);
         bankTransaction.setNumber(generateNumber());
         bankTransaction.setTransactionStatus(TransactionStatusEnum.SUCCESSFULL);
-//        bankTransaction.setAmount(orderTotal);
+        bankTransaction.setAmount(orderTotal);
         bankTransaction.setDate(LocalDate.now());
         bankTransaction = this.bankTransactionRepository.save(bankTransaction);
-        return bankTransaction.getId();
+        this.orderService.changeStatusAndOwnership(orderId, bankTransaction.getId(), OrderStatusEnum.COMPLETE);
+        return bankTransaction.getNumber();
     }
 
     @Override
-    public String createUnsuccessfulTransaction(String orderId, String number) {
+    public Long createUnsuccessfulTransaction(Long orderId, String number) {
         BankTransaction bankTransaction = new BankTransaction();
         bankTransaction.setBankAccount(this.bankAccountRepository.findByNumber(number).get());
         bankTransaction.setTransactionStatus(TransactionStatusEnum.DECLINED);
         bankTransaction.setNumber(generateNumber());
-//        bankTransaction.setAmount(this.orderService.getOrderTotal(orderId));
+        bankTransaction.setAmount(this.orderService.getOrderTotal(orderId));
         bankTransaction.setDate(LocalDate.now());
         bankTransaction = this.bankTransactionRepository.save(bankTransaction);
-        return bankTransaction.getId();
+        this.orderService.changeStatusAndOwnership(orderId, bankTransaction.getId(), OrderStatusEnum.DECLINED);
+        return bankTransaction.getNumber();
     }
 
     @Override

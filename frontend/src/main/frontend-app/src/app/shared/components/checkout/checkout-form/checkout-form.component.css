@@ -1,0 +1,17 @@
+.checkout-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.checkout-form > form > div:nth-child(2){
+  justify-content: center;
+}
+
+.checkout-form ::placeholder{
+  text-align: center;
+}
+
+hr{
+  background-color: white;
+}

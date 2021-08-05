@@ -28,7 +28,7 @@ public class ApplicationBeanConfiguration {
 
     @Bean
     public PasswordEncoder create(){
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

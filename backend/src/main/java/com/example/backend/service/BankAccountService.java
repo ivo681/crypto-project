@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public interface BankAccountService {
@@ -8,11 +9,15 @@ public interface BankAccountService {
 
     boolean checkIfBankIsValid(String number, int cvv, String fullName, LocalDate validTo);
 
-    boolean hasEnoughBalance(String orderId, String number);
+    boolean hasEnoughBalance(Long orderId, String number);
 
-    String createUnsuccessfulTransaction(String orderId, String number);
+    Long createUnsuccessfulTransaction(Long orderId, String number);
 
-    String createSuccessfulTransaction(String orderId, String number);
+    Long createSuccessfulTransaction(Long orderId, String number);
 
     void removeBlockedAmountsAndTransferToShop();
+
+    boolean canPayoutUsers(BigDecimal totalSum, String cardNumber);
+
+    void payoutUserAndBlockAmount(String cardNumber, BigDecimal totalSum);
 }

@@ -19,11 +19,12 @@
         [ngClass]="{'is-invalid input-validation-error' : f.submitted && email.invalid}"
         class="form-control"
         placeholder="Email address"
+        email
         required
         autofocus
       />
-      <div *ngIf="(f.submitted && email.invalid) || modelError.email">
-        <small *ngIf="email.errors?.required || email.errors?.email || modelError.email"
+      <div *ngIf="(f.submitted && email.invalid) || email.touched">
+        <small *ngIf="email.errors?.required || email.errors?.email"
                class="form-text bg-danger rounded">
           Please provide a valid email</small>
 
@@ -41,15 +42,19 @@
         pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@!#$%^&+=])(?=\S+$).{8,}"
         required
       />
-      <div *ngIf="f.submitted && password.invalid">
-        <small *ngIf="password.errors?.required || password.errors?.pattern"
+      <div *ngIf="(f.submitted && password.invalid) || password.touched">
+        <small *ngIf="(password.errors?.required || password.errors?.pattern) && !invalidCredentials"
                class="text-light form-text bg-danger rounded">
           Password must be at least 8 characters long, including: 1 uppercase, 1 lowercase, 1 number, 1 special character</small>
       </div>
       <p class="message">Not registered? <a [routerLink]="['../register']">Register</a></p>
+      <p class="popup message" onclick="toggleWindow()">Forgot password?
+        <span class="popuptext" id="myPopup">Relax and try to remember your password :)</span>
+      </p>
       <button class="btn btn-lg btn-primary btn-block" type="submit" >
         Sign in
       </button>
     </form>
   </section>
 </section>
+

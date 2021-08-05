@@ -2,8 +2,9 @@ import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
 import {IUser} from "../shared/interfaces";
 import {LocalStorage} from "../core/injection-tokens";
 import {HttpClient} from "@angular/common/http";
-import {UserLoginBindingModel} from "../shared/interfaces/user-login-binding-model";
-import {UserRegisterBindingModel} from "../shared/interfaces/user-register-binding-model";
+import {UserLoginBindingModel} from "../shared/interfaces/binding/user-login-binding-model";
+import {UserRegisterBindingModel} from "../shared/interfaces/binding/user-register-binding-model";
+import {AuthenticatedUserModel} from "../shared/models/AuthenticatedUserModel";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,20 @@ export class UserService {
 
   get userEmail(): string {
     return this.localStorage.getItem('email') || '';
+  }
+
+  get isAdmin() : boolean {
+    if (this.isLogged){
+      // @ts-ignore
+      let currentUser = <AuthenticatedUserModel>JSON.parse(localStorage.getItem("<USER>"));
+      for (let authority of currentUser.authorities) {
+        // @ts-ignore
+        if(authority.authority === 'ROLE_ADMIN'){
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   constructor(@Inject(LocalStorage) private localStorage: Window['localStorage'],
@@ -60,7 +75,6 @@ export class UserService {
 
     this.user = response.user;
     this.localStorage.setItem('<USER>', JSON.stringify(response.user));
-
   }
 
   register(formData: UserRegisterBindingModel) {
