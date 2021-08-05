@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {UserService} from "../../user/user.service";
 
 @Component({
   selector: 'app-admin-menu',
   templateUrl: './admin-menu.component.html',
   styleUrls: ['./admin-menu.component.css']
 })
-export class AdminMenuComponent implements OnInit {
+export class AdminMenuComponent {
 
-  constructor() { }
+  get isLogged(): boolean {
+    return this.userService.isLogged;
+  }
 
-  ngOnInit(): void {
+  get isAdmin(): boolean{
+    return this.userService.isAdmin;
+  }
+
+  get userEmail(): string{
+    if (this.isLogged){
+      return this.userService.userEmail;
+    }
+    return '';
+  }
+
+  constructor(private userService: UserService) {
   }
 
 }

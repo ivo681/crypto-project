@@ -1,0 +1,40 @@
+.admin-wrapper{
+  margin: 100px auto;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  color: white;
+}
+
+
+h2.admin-logged, h4.admin-logged{
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+ul.admin-logged-menu{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
+  width: 100%;
+}
+
+.admin-logged-wrapper{
+  margin: 100px auto;
+  backdrop-filter: blur(2px);
+  color: white;
+}
+
+.admin-logged-menu-item{
+  margin-right: 10px;
+}
+
+.admin-logged-menu-item:last-child{
+  margin-right: 0px;
+}
+
+.admin-logged-menu-item a{
+  text-decoration: none;
+  color: white;
+}

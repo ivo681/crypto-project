@@ -3,19 +3,8 @@
   margin: 40px auto;
 }
 
-.image-wrapper > img{
-  max-width: 400px;
-  width: 100%;
-}
-
-.receipts-display{
+app-transaction-list{
   display: flex;
   flex-direction: row;
-
-}
-
-app-transactions-list{
-  flex-basis: 73%;
-  margin-right: 10px;
 }
 

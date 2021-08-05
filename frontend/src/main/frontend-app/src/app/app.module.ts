@@ -16,15 +16,20 @@ import {TransactionModule} from "./modules/transaction/transaction.module";
 import {AdminModule} from "./modules/admin/admin.module";
 import {AdminGuard} from "./core/guards/admin.guard";
 import {ErrorsModule} from "./modules/errors/errors.module";
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DailyTransactionsComponent } from './modules/admin/daily-transactions/daily-transactions.component';
+import { AllTransactionsComponent } from './modules/admin/all-transactions/all-transactions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     AdminModule,
     ErrorsModule,
     CoreModule,
@@ -35,7 +40,8 @@ import {ErrorsModule} from "./modules/errors/errors.module";
     WalletModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NoopAnimationsModule
   ],
   providers: [
     AdminGuard,

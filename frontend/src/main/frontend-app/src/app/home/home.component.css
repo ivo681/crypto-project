@@ -7,10 +7,10 @@
   /* min-height: 100vh; */
 }
 
-/*.home-wrapper{*/
-/*  width: 80%;*/
-/*  margin: 40px auto;*/
-/*}*/
+.home-wrapper{
+  width: 80%;
+  margin: 40px auto;
+}
 
 .home-wrapper-card{
   justify-content: space-around;

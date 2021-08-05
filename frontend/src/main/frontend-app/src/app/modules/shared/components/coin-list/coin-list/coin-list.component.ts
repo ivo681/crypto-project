@@ -15,6 +15,8 @@ import {DataTransferService} from "../../../services/data-transfer/data-transfer
   styleUrls: ['./coin-list.component.css']
 })
 export class CoinListComponent implements OnInit {
+  page = 1;
+  pageSize = 5;
   @Input() buy?: boolean;
   coins: CoinServiceModel[] = [];
   @Input() coinsForView: CoinViewModel[] = [];
@@ -35,8 +37,9 @@ export class CoinListComponent implements OnInit {
     observable.subscribe((response) => {
         this.coins = response;
         if (this.coins){
-          for (let coin of this.coins) {
-            let coinViewModel : CoinViewModel = this.dataTransferService.transferCoinDataToViewModel(coin);
+          for (let i = 0; i < this.coins.length; i++) {
+            let coinViewModel : CoinViewModel = this.dataTransferService.transferCoinDataToViewModel(this.coins[i]);
+            coinViewModel.index = i + 1;
             this.coinsForView.push(coinViewModel);
           }
         }

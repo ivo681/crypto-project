@@ -1,9 +1,9 @@
-#CryptoMania Bulgaria
+# CryptoMania Bulgaria
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) for the front-end
 and [Spring](https://spring.io/) for the back-end
 
-#CryptoMania Bulgaria Project
+# CryptoMania Bulgaria Project
 
 - [Description](#description)
 - [Starting the Full Application](#starting-the-full-application)
@@ -23,14 +23,14 @@ and [Spring](https://spring.io/) for the back-end
 - [Frontend Information](#frontend-information)
 - [Sample Data for Testing](#sample-data-for-testing)
 
-##Description
+## Description
 CryptoMania Bulgaria EOOD is a fictional cryptocurrency exchange platform. 
 Many of my peers and close friends
 have decided to indulge in crypto exchanges and around them, I have gathered a lot of information about current exchange platforms.
 The digital currencies that are on offer in this project are 100% fictional and inspired from local Bulgarian events and personas. 
 The purpose is to bring users a variety of exciting currencies for which the prices fluctuate hourly.
 
-##Starting the Full Application
+## Starting the Full Application
 For an IDE, the project was developed on [IntelliJ Ultimate](https://www.jetbrains.com/help/idea/2021.2/discover-intellij-idea.html).
 It is recommended to test it on the same IDE for satisfactory experiences. 
 In order to start it please download the complete project from the repository. After the indexation you will be able to
@@ -56,7 +56,7 @@ and view their transactions with details.
 The first user that register on the website receives an additional role/authority- Admin. Apart from the functionalities which all
 users have, the admin can access the Admin Panel, while others are blocked due to being unauthorized.
 
-##Authentication
+## Authentication
 Anonymous users can navigate to the login and register pages using the buttons on the right side of the header.
 Both pages use template-driven forms with validations, guiding the users what data is expected to be provided(ex:
 email, date of birth, matching passwords, following a password pattern, etc). 
@@ -65,7 +65,7 @@ such as whether the provided email is already used, the user being over 18 years
 is shown appropriate messages for guidance. Once registered and logged in,
 on the header of the page there is a button for Log Out.
 
-#Not Logged pages
+# Not Logged pages
 ## Home Page
 The Home Page displays a couple of coins with the website logo, short info and button for the About Us page.
 
@@ -75,7 +75,7 @@ The About Us page gives some information how the exchange platform project was d
 ## Products Page
 The Products page gives static information in the form of images what coins are on the offer in the platform.
 
-#Logged In Pages
+# Logged In Pages
 
 ## Marketplace
 
@@ -118,23 +118,23 @@ On the Transactions page a table loads with a list of the attempted user transac
 The user can see the date & time, coin name, order number, order type, price and status.
 On the right side is a funny picture showing how many people think crypto trading works.
 
-##Admin Panel
+## Admin Panel
 
 On the Admin Panel page a table is loaded with a full list of the attempted transactions on the platform for the past
 24 hours. The admin can see exactly what the users are doing and the status of operations.
 
-#Backend information
+# Backend information
 The Backend has an implemented Spring Security system with a custom configuration on the cross requests made from the
 Angular CLI server. The structure is as if follows: config(security, bean, Jwt token, etc),
 events(cron and scheduled when to update coin prices, bank account balances and clear incomplete orders)
 , exceptions, init(populating the database tables with prepared information),
 model(binding, dtos, enums, service, validators), repository, service, web controllers.
 
-#Frontend information
+# Frontend information
 The Frontend uses two guards- authentication and admin in order to implement a level of security.
 The structure is as it follows: about, core(header, footer, guards), home, modules(admin, errors, market, product, shared, transaction, user, wallet).
 
-#Sample Data for Testing
+# Sample Data for Testing
 Valid bank account for testing with high balance for purchases
 "number": 1111111111111111,
 "full_name": "Tester One",

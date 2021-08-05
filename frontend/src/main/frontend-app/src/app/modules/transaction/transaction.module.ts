@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 import {TransactionsRoutingModule} from "./transaction-routing.module";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {SharedModule} from "../shared/shared.module";
 
 
 
 @NgModule({
   declarations: [
     TransactionsComponent,
-    TransactionsListComponent
   ],
   imports: [
     CommonModule,
-    TransactionsRoutingModule
+    SharedModule,
+    TransactionsRoutingModule,
+    NgbModule,
   ]
 })
 export class TransactionModule { }

@@ -14,6 +14,7 @@ export class DataTransferService {
 
   transferCoinDataToViewModel(coinServiceModel: CoinServiceModel) : CoinViewModel{
     let coinViewModel : CoinViewModel = {
+      index: 0,
       name : coinServiceModel.name,
       quantity : coinServiceModel.quantity,
       startPriceChange : this.analyticalService.calculateChangePercentage(coinServiceModel.initialPrice,
@@ -35,6 +36,7 @@ export class DataTransferService {
 
   transferOperationDataToViewModel(operationServiceModel: OperationServiceModel) : OperationViewModel{
     let operationViewModel: OperationViewModel = {
+      userEmail: operationServiceModel.userEmail,
       coinName: operationServiceModel.coinName,
       dateTime: operationServiceModel.dateTime,
       orderNumber: operationServiceModel.orderNumber,

@@ -33,6 +33,10 @@ public interface OrderService {
 
     List<OperationServiceModel> getUserOperations(String userEmail);
 
+    List<OperationServiceModel> getAllUserOperations();
+
+    List<OperationServiceModel> getUserOperationsFromToday();
+
     void clearIncompleteOrders();
 
 //    List<OrderViewModel> getUserOrders(String userEmail);

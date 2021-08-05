@@ -36,3 +36,51 @@ button.btn > a{
   color: white;
   text-decoration: none;
 }
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: .25rem;
+}
+.page-link:hover {
+  z-index: 2;
+  color: #0056b3;
+  text-decoration: none;
+  background: linear-gradient(90deg, rgba(133,117,255,1) 32%, rgba(24,76,164,1) 69%) !important;
+  border-color: #dee2e6;
+}
+.page-link {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  background: linear-gradient(90deg, rgba(133,117,255,1) 32%, rgba(24,76,164,1) 69%)  !important;
+  border: 1px solid #dee2e6;
+}
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background: linear-gradient(90deg, rgba(133,117,255,1) 32%, rgba(24,76,164,1) 69%)  !important;
+  backdrop-filter: blur(2px);
+  border-color: #007bff;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background: linear-gradient(90deg, rgba(133,117,255,1) 32%, rgba(24,76,164,1) 69%) !important;
+  border-color: #dee2e6;
+}

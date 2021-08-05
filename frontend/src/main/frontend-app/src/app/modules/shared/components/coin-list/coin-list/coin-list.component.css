@@ -1,6 +1,6 @@
 .none-available{
   width: 100%;
-  margin: 10px auto;
+  margin: 150px auto;
   backdrop-filter: blur(5px);
   color: white;
   font-weight: bolder;
@@ -9,7 +9,7 @@
 table{
   /* -webkit-text-stroke: 0.3px black; */
   width: 100%;
-  margin: 10px auto;
+  /*margin: 10px auto;*/
   backdrop-filter: blur(100px);
   color: white;
   font-weight: bolder;
@@ -74,4 +74,9 @@ td > button > a{
   align-items: center;
   color: white;
   backdrop-filter: blur(2px);
+}
+
+.coin-list-wrapper{
+  display: flex;
+  flex-direction: column;
 }

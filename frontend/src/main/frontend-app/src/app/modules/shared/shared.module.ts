@@ -6,6 +6,8 @@ import { CheckoutCartComponent } from './components/checkout/checkout-cart/check
 import { CoinListComponent } from './components/coin-list/coin-list/coin-list.component';
 import {RouterModule} from "@angular/router";
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 
 
 
@@ -14,17 +16,20 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     CheckoutFormComponent,
     CheckoutCartComponent,
     CoinListComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    TransactionListComponent
   ],
     imports: [
         CommonModule,
         FormsModule,
-        RouterModule
+        RouterModule,
+        NgbModule,
     ],
   exports: [
     CheckoutFormComponent,
     CheckoutCartComponent,
-    CoinListComponent
+    CoinListComponent,
+    TransactionListComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,41 @@
+<section *ngIf="operationsForView.length > 0" class="receipts-display-table">
+  <table class="table-hover">
+    <thead>
+    <tr>
+      <th *ngIf="!user" scope="col">Email</th>
+      <th scope="col">Date & Time</th>
+      <th scope="col">Name</th>
+      <th scope="col">Order No</th>
+      <th scope="col">Order Type</th>
+      <th scope="col">Price</th>
+      <th scope="col">STATUS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let operation of operationsForView
+     | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+      <th *ngIf="!user" scope="row">{{operation.userEmail}}</th>
+      <th scope="row">{{operation.dateTime}}</th>
+      <td class="coin-list"><img src="../../../assets/static/img/coins/static/{{operation.coinName}}.png" alt=""><span>{{operation.coinName}} coin</span></td>
+      <td>{{operation.orderNumber}}</td>
+      <td>{{operation.orderType}}</td>
+      <td>BGN {{operation.price}}</td>
+      <td>{{operation.status}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <ngb-pagination [(page)]="page" [pageSize]="pageSize"
+                  [collectionSize]="operationsForView.length"></ngb-pagination>
+</section>
+<section *ngIf="operationsForView.length > 0 && user" class="receipts-display-image">
+  <div class="image-wrapper">
+    <img src="../../../../assets/static/img/w9tnow6lhmh61.png" alt="">
+  </div>
+</section>
+<section *ngIf="operationsForView.length < 1" class="none-available">
+  <h2 *ngIf="user" class="text-center">You don't have any transactions on your account</h2>
+  <h2 *ngIf="!user && daily" class="text-center">There are no transactions today</h2>
+  <h2 *ngIf="!user && !daily" class="text-center">There are no transactions</h2>
+</section>
+
+

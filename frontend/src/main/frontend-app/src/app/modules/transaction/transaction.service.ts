@@ -13,4 +13,5 @@ export class TransactionService {
   getUserTransactions(){
     return this.httpClient.get<any>("http://localhost:8080/users/operations")
   }
+
 }

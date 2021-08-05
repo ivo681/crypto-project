@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,10 +31,19 @@ public interface OrderRepository extends JpaRepository<Order, String> {
             " AND o.orderType=:type AND o.orderStatus=:status")
     List<Order> findOwnedCoinsByNameAndUserEmail(String capitalName, String email, OrderStatusEnum status, OrderTypeEnum type);
 
-    @Query("SELECT o FROM Order o WHERE o.user.email=:userEmail AND o.orderStatus=:complete OR o.orderStatus=:declined" +
+    @Query("SELECT o FROM Order o WHERE o.user.email=:userEmail AND (o.orderStatus=:complete OR o.orderStatus=:declined)" +
             " ORDER BY o.dateAndTime DESC")
     List<Order> getUserOperationsByEmailAndStatus(String userEmail, OrderStatusEnum complete, OrderStatusEnum declined);
 
     @Query("SELECT o FROM Order o WHERE o.orderStatus= :incomplete")
     List<Order> findByIncompleteStatus(OrderStatusEnum incomplete);
+
+    @Query("SELECT o FROM Order o WHERE (o.orderStatus=:complete OR o.orderStatus=:declined)" +
+            "AND o.dateAndTime > :start AND o.dateAndTime < :end ORDER BY o.dateAndTime DESC")
+    List<Order> getUserOperationsByStatusAndFromToday(OrderStatusEnum complete, OrderStatusEnum declined,
+                                                      LocalDateTime start, LocalDateTime end);
+
+    @Query("SELECT o FROM Order o WHERE (o.orderStatus=:complete OR o.orderStatus=:declined)" +
+            " ORDER BY o.dateAndTime DESC")
+    List<Order> getAllUserOperations(OrderStatusEnum complete, OrderStatusEnum declined);
 }

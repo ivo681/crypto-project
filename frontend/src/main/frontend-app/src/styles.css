@@ -1,4 +1,5 @@
 @import url('assets/static/css/bootstrap.min.css');
+/*@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css");*/
 @import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
 
 
@@ -15,8 +16,19 @@ body{
   margin-bottom: 60px;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .not-logged{
   background-image: url('assets/static/img/pierre-borthiry-vBCVcWUyvyM-unsplash (1).jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  height:100%;
+  overflow:auto;
 }
 
 .logged{
@@ -31,3 +43,6 @@ main{
   margin: 150px auto;
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

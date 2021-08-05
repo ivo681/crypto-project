@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -69,4 +70,19 @@ public class UsersController {
         List<OperationServiceModel> operationServiceModels = this.orderService.getUserOperations(principal.getName());
         return new ResponseEntity(operationServiceModels, HttpStatus.OK);
     }
+
+    @GetMapping("/all-operations")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Object> getAllUserOperations(){
+        List<OperationServiceModel> operationServiceModels = this.orderService.getAllUserOperations();
+        return new ResponseEntity(operationServiceModels, HttpStatus.OK);
+    }
+
+    @GetMapping("/daily-operations")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Object> getDailyOperations(){
+        List<OperationServiceModel> operationServiceModels = this.orderService.getUserOperationsFromToday();
+        return new ResponseEntity(operationServiceModels, HttpStatus.OK);
+    }
+
 }

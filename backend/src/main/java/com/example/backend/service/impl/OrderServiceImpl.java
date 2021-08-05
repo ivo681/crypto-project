@@ -18,7 +18,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -165,22 +167,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OperationServiceModel> getUserOperations(String userEmail) {
-        List<OperationServiceModel> operationServiceModels = new ArrayList<>();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
         List<Order> successfulOrDeclinedOrders = this.orderRepository.getUserOperationsByEmailAndStatus(userEmail, OrderStatusEnum.COMPLETE, OrderStatusEnum.DECLINED);
-        for (Order order : successfulOrDeclinedOrders) {
-            for (BankTransaction bankTransaction : order.getBankTransactions()) {
-                OperationServiceModel model = new OperationServiceModel();
-                model.setDateTime(order.getDateAndTime().format(dateTimeFormatter));
-                model.setPrice(order.getTotalSum());
-                model.setOrderNumber(order.getNumber());
-                model.setStatus(bankTransaction.getTransactionStatus());
-                model.setOrderType(order.getOrderType());
-                model.setCoinName(order.getCoin().getName());
-                operationServiceModels.add(model);
-            }
-        }
-        return operationServiceModels;
+        return this.extractServiceModels(successfulOrDeclinedOrders);
+    }
+
+    @Override
+    public List<OperationServiceModel> getAllUserOperations() {
+        List<Order> orders = this.orderRepository.getAllUserOperations(OrderStatusEnum.COMPLETE, OrderStatusEnum.DECLINED);
+        return this.extractServiceModels(orders);
+    }
+
+    @Override
+    public List<OperationServiceModel> getUserOperationsFromToday() {
+        LocalDate today = LocalDate.now();
+        LocalTime start = LocalTime.of(0, 0);
+        LocalTime end = LocalTime.of(23, 59);
+        List<Order> orders = this.orderRepository.getUserOperationsByStatusAndFromToday(
+                OrderStatusEnum.COMPLETE, OrderStatusEnum.DECLINED,
+                LocalDateTime.of(today, start), LocalDateTime.of(today, end));
+        return this.extractServiceModels(orders);
     }
 
     @Override
@@ -217,5 +222,24 @@ public class OrderServiceImpl implements OrderService {
             orderNumber = (10000000 + this.random.nextInt(9000000));
         }
         return orderNumber;
+    }
+
+    private List<OperationServiceModel> extractServiceModels(List<Order> orders){
+        List<OperationServiceModel> operationServiceModels = new ArrayList<>();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
+        for (Order order : orders) {
+            for (BankTransaction bankTransaction : order.getBankTransactions()) {
+                OperationServiceModel model = new OperationServiceModel();
+                model.setUserEmail(order.getUser().getEmail());
+                model.setDateTime(order.getDateAndTime().format(dateTimeFormatter));
+                model.setPrice(order.getTotalSum());
+                model.setOrderNumber(order.getNumber());
+                model.setStatus(bankTransaction.getTransactionStatus());
+                model.setOrderType(order.getOrderType());
+                model.setCoinName(order.getCoin().getName());
+                operationServiceModels.add(model);
+            }
+        }
+        return operationServiceModels;
     }
 }

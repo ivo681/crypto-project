@@ -1,32 +1,36 @@
-<table *ngIf="coinsForView.length > 0" [ngClass]="{'wallet-page' : !buy}" class="table-hover">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col" *ngIf="!buy">Quantity owned</th>
-    <th scope="col">Start price change%</th>
-    <th scope="col">24hrs change%</th>
-    <th scope="col">Hourly change%</th>
-    <th scope="col">Price</th>
-    <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let coin of coinsForView; index as i">
-    <th scope="row">{{i + 1}}</th>
-    <td class="coin-list"><img src="../../../assets/static/img/coins/static/{{coin.name}}.png" alt=""><span>{{coin.name}} coin</span></td>
-    <td *ngIf="!buy">{{coin.quantity}}</td>
-    <td class="{{coin.startClass}}">{{coin.startPriceChange}}</td>
-    <td class="{{coin.dailyClass}}">{{coin.dailyChange}}</td>
-    <td class="{{coin.hourlyClass}}">{{coin.hourlyChange}}</td>
-    <td>BGN {{coin.currentPrice}}</td>
-    <td><button type="button" class="btn btn-success">
-      <a *ngIf="buy" routerLink='buy/{{coin.name.toLowerCase()}}'>Buy Now</a>
-      <a *ngIf="!buy" routerLink='sell/{{coin.name.toLowerCase()}}'>Sell Now</a>
-    </button></td>
-  </tr>
-  </tbody>
-</table>
+<section *ngIf="coinsForView.length > 0" class="coin-list-wrapper">
+  <table [ngClass]="{'wallet-page' : !buy}" class="table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col" *ngIf="!buy">Quantity owned</th>
+      <th scope="col">Start price change%</th>
+      <th scope="col">24hrs change%</th>
+      <th scope="col">Hourly change%</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let coin of coinsForView | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+      <th scope="row">{{coin.index}}</th>
+      <td class="coin-list"><img src="../../../assets/static/img/coins/static/{{coin.name}}.png" alt=""><span>{{coin.name}} coin</span></td>
+      <td *ngIf="!buy">{{coin.quantity}}</td>
+      <td class="{{coin.startClass}}">{{coin.startPriceChange}}</td>
+      <td class="{{coin.dailyClass}}">{{coin.dailyChange}}</td>
+      <td class="{{coin.hourlyClass}}">{{coin.hourlyChange}}</td>
+      <td>BGN {{coin.currentPrice}}</td>
+      <td><button type="button" class="btn btn-success">
+        <a *ngIf="buy" routerLink='buy/{{coin.name.toLowerCase()}}'>Buy Now</a>
+        <a *ngIf="!buy" routerLink='sell/{{coin.name.toLowerCase()}}'>Sell Now</a>
+      </button></td>
+    </tr>
+    </tbody>
+  </table>
+  <ngb-pagination [(page)]="page" [pageSize]="pageSize"
+                  [collectionSize]="coinsForView.length"></ngb-pagination>
+</section>
 <section *ngIf="coinsForView.length < 1" class="none-available">
 <h2 *ngIf="!buy" class="text-center">You don't have any crypto currencies at the moment</h2>
 <h2 *ngIf="buy" class="text-center">There are no available crypto currencies at the moment for sale, please excuse us</h2>

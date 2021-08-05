@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class OperationServiceModel {
+    private String userEmail;
     private String dateTime;
     private String coinName;
     private Long orderNumber;
@@ -64,5 +65,13 @@ public class OperationServiceModel {
 
     public void setStatus(TransactionStatusEnum status) {
         this.status = status;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

@@ -1,4 +1,5 @@
 export interface CoinViewModel{
+  index: number;
   name : string;
   quantity : number;
   startPriceChange : string;
