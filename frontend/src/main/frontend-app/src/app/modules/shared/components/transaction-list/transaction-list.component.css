@@ -1,7 +1,12 @@
 .receipts-display-table{
   flex-basis: 73%;
   margin-right: 10px;
-  margin-right: 10px;
+  flex-grow: 3;
+}
+
+.transaction-wrapper{
+  display: flex;
+  flex-direction: row;
 }
 
 .receipts-display-table > table{

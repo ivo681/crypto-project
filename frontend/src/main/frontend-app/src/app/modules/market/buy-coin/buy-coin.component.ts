@@ -13,22 +13,11 @@ import {AnalyticalService} from "../../shared/services/analytical/analytical.ser
 })
 export class BuyCoinComponent implements OnInit {
   coinUrlEl : string = this.activatedRoute.snapshot.params['coin'];
+  showCoin?: Promise<boolean>;
   unsuccessfulOrder: boolean = false;
   @Input() total: string = '0';
-  @Input() coin: CoinBuyViewModel = {
-    name : '',
-    quantity : 0,
-    initialPrice : 0,
-    yesterdaysAvgPrice : 0,
-    previousPrice : 0,
-    currentPrice : 0,
-    startPriceChange : '',
-    dailyChange : '',
-    hourlyChange : '',
-    startClass : '',
-    dailyClass : '',
-    hourlyClass : ''
-  };
+  // @ts-ignore
+  @Input() coin: CoinBuyViewModel;
   coinName: string = this.coinUrlEl[0].toUpperCase() + this.coinUrlEl.slice(1);
   model : OrderBindingModel = {
     name: '',
@@ -57,6 +46,7 @@ export class BuyCoinComponent implements OnInit {
         this.coin.dailyClass = this.analyticalService.appendClass(this.coin.dailyChange);
         this.coin.hourlyClass = this.analyticalService.appendClass(this.coin.hourlyChange);
         this.model.price = this.coin.currentPrice;
+        this.showCoin = Promise.resolve(true);
       },
       error => {
         this.router.navigate(["/not-found"])

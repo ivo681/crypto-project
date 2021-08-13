@@ -1,4 +1,4 @@
-<div class="crypto card flex-md-row mb-4 box-shadow h-md-250">
+<div *ngIf="showCoin | async" class="crypto card flex-md-row mb-4 box-shadow h-md-250">
   <div class="crypto-logo">
     <h2 class="display-6 font-weight-bold">
       {{coin.name}} Coin

@@ -1,4 +1,4 @@
-<section class="checkout-cart">
+<section *ngIf="showCheckout | async" class="checkout-cart">
   <div class="order-md-2 mb-4">
     <h5 class="justify-content-between align-items-center mb-3">
       <p>Order No: {{order.orderNumber}}</p>

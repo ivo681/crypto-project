@@ -12,6 +12,7 @@ import {AdminService} from "../../../admin/admin.service";
   styleUrls: ['./transaction-list.component.css']
 })
 export class TransactionListComponent implements OnInit {
+  showTransactions?: Promise<boolean>;
   @Input() user?: boolean;
   @Input() daily? : boolean;
   page = 1;
@@ -36,6 +37,7 @@ export class TransactionListComponent implements OnInit {
               this.operationsForView.push(operationViewModel);
             }
           }
+          this.showTransactions= Promise.resolve(true);
         },
         error => {})
     } else {
@@ -47,7 +49,6 @@ export class TransactionListComponent implements OnInit {
       }
       promise.subscribe((response) => {
           this.operations = response;
-          console.log(response);
           if (this.operations){
             for (let operation of this.operations) {
               let operationViewModel : OperationViewModel = this.dataTransferService
@@ -55,6 +56,7 @@ export class TransactionListComponent implements OnInit {
               this.operationsForView.push(operationViewModel);
             }
           }
+          this.showTransactions= Promise.resolve(true);
         },
         error => {})
     }

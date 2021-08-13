@@ -13,13 +13,10 @@ import {SellService} from "../../../../wallet/sell.service";
 })
 export class CheckoutFormComponent implements OnInit {
   orderNumber : string = this.activatedRoute.snapshot.params['number'];
-  coinUrlEl : string = this.activatedRoute.snapshot.params['coin'];
   @Input() sellOrderNumber?: string;
   @Input() buy? : boolean;
   noCardFoundWithDetails: boolean = false;
-  insufficientUserBalance: boolean = false;
-  insufficientSystemBalance: boolean = false;
-
+  insufficientBalance: boolean = false;
   model: PaymentBindingModel = {
     fullName: '',
     cardNumber: '',
@@ -45,20 +42,12 @@ export class CheckoutFormComponent implements OnInit {
 
   sendPaymentRequest() : void {
     this.noCardFoundWithDetails = false;
-    this.insufficientUserBalance = false;
+    this.insufficientBalance = false;
     this.buyService.makePurchase(this.model, this.orderNumber)
       .subscribe((response)=>{
         this.router.navigate(["/market/confirmation/" + response])
       }, error => {
-        if (error.status == 400){
-          this.router.navigate(['/not-found'])
-        } else if (error.status == 404){
-          this.noCardFoundWithDetails = true;
-        } else if (error.status == 417){
-          this.insufficientUserBalance = true;
-        } else {
-          this.router.navigate(['/server-error'])
-        }
+        this.errorHandlingCheckout(error)
       })
   }
 
@@ -68,16 +57,20 @@ export class CheckoutFormComponent implements OnInit {
       .subscribe((response)=>{
         this.router.navigate(["/wallet/confirmation/" + response])
       }, error => {
-        if (error.status == 400){
-          this.router.navigate(['/not-found'])
-        } else if (error.status == 404){
-          this.noCardFoundWithDetails = true;
-        } else if (error.status == 417){
-          this.insufficientSystemBalance = true;
-        } else {
-          this.router.navigate(['/server-error'])
-        }
+        this.errorHandlingCheckout(error)
       })
+  }
+
+  errorHandlingCheckout(error: any){
+    if (error.status == 400){
+      this.router.navigate(['/not-found'])
+    } else if (error.status == 404){
+      this.noCardFoundWithDetails = true;
+    } else if (error.status == 417){
+      this.insufficientBalance = true;
+    } else {
+      this.router.navigate(['/server-error'])
+    }
   }
 
 }

@@ -15,6 +15,7 @@ import {DataTransferService} from "../../../services/data-transfer/data-transfer
   styleUrls: ['./coin-list.component.css']
 })
 export class CoinListComponent implements OnInit {
+  showList?: Promise<boolean>;
   page = 1;
   pageSize = 5;
   @Input() buy?: boolean;
@@ -43,6 +44,7 @@ export class CoinListComponent implements OnInit {
             this.coinsForView.push(coinViewModel);
           }
         }
+        this.showList = Promise.resolve(true);
       },
       error => {})
   }

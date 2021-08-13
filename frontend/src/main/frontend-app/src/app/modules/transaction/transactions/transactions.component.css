@@ -3,8 +3,4 @@
   margin: 40px auto;
 }
 
-app-transaction-list{
-  display: flex;
-  flex-direction: row;
-}
 

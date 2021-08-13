@@ -19,6 +19,10 @@ and [Spring](https://spring.io/) for the back-end
 - [Logged In Pages](#logged-in-pages)
   - [Marketplace](#marketplace)
   - [My Wallet](#my-wallet)
+  - [Transactions](#transactions)
+- [Admin Panel](#admin-pages)
+  - [Daily Transactions](#daily-transactions)
+  - [All Transactions](#all-transactions)
 - [Backend Information](#backend-information)
 - [Frontend Information](#frontend-information)
 - [Sample Data for Testing](#sample-data-for-testing)
@@ -118,10 +122,17 @@ On the Transactions page a table loads with a list of the attempted user transac
 The user can see the date & time, coin name, order number, order type, price and status.
 On the right side is a funny picture showing how many people think crypto trading works.
 
-## Admin Panel
+# Admin Panel
 
-On the Admin Panel page a table is loaded with a full list of the attempted transactions on the platform for the past
+On the Admin Panel a menu page appears with two options- Daily Transactions and All Transactions.
+
+## Daily Transactions
+On the Daily Transactions admin page a table is loaded with a full list of the attempted transactions on the platform for the past
 24 hours. The admin can see exactly what the users are doing and the status of operations.
+
+## All Transactions
+On the All Transactions admin page a table is loaded with a full list of the attempted transactions on the platform.
+The admin can see exactly what the users are doing and the status of operations.
 
 # Backend information
 The Backend has an implemented Spring Security system with a custom configuration on the cross requests made from the
@@ -138,14 +149,14 @@ The structure is as it follows: about, core(header, footer, guards), home, modul
 Valid bank account for testing with high balance for purchases
 "number": 1111111111111111,
 "full_name": "Tester One",
-"validTo": "2023-02-24",
+"validTo": "02/23",
 "cvv": 101,
 "balance": 20000
 
 Valid bank account for testing with low balance for purchases
 "number": 2222222222222222,
 "full_name": "Tester Two",
-"validTo": "2023-02-24",
+"validTo": "02/23",
 "cvv": 102,
 "balance": 0.10
 

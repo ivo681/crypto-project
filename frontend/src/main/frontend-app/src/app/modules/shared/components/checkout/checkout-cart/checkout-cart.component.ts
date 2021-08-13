@@ -11,6 +11,7 @@ import {SellService} from "../../../../wallet/sell.service";
   styleUrls: ['./checkout-cart.component.css']
 })
 export class CheckoutCartComponent implements OnInit {
+  showCheckout?: Promise<boolean>;
   buyOrderNumber : string = this.activatedRoute.snapshot.params['number'];
   coinName : string = this.activatedRoute.snapshot.params['coin'];
   @Output() redirect: EventEmitter<any> = new EventEmitter();
@@ -42,12 +43,9 @@ export class CheckoutCartComponent implements OnInit {
           this.order.total = response.total;
           this.order.coinFee = (response.total / 1.05).toFixed(2);
           this.order.commissionFee = (response.total - (response.total / 1.05)).toFixed(2);
+          this.showCheckout = Promise.resolve(true);
         }, error => {
-          if (error.status == 404){
-            this.router.navigate(['/not-found']);
-          } else {
-            this.router.navigate(['/server-error'])
-          }
+          this.errorHandlingCheckout(error)
         })
     } else {
       this.sellService.getOwnedCoinDetails(this.coinName)
@@ -62,13 +60,19 @@ export class CheckoutCartComponent implements OnInit {
             (this.order.coinQuantity * response.coinModel.currentPrice))
             .toFixed(2);
           this.order.total = (Number(this.order.coinFee) - Number(this.order.commissionFee)).toFixed(2);
+          this.showCheckout = Promise.resolve(true);
         }, error => {
-          if (error.status == 404){
-            this.router.navigate(['/not-found']);
-          } else {
-            this.router.navigate(['/server-error'])
-          }
+          this.errorHandlingCheckout(error)
         })
+    }
+  }
+
+
+  errorHandlingCheckout(error: any){
+    if (error.status == 404){
+      this.router.navigate(['/not-found'])}
+    else {
+      this.router.navigate(['/server-error'])
     }
   }
 
