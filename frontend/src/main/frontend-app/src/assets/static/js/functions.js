@@ -23,10 +23,10 @@ function formatString(e) {
   );
 }
 
-function toggleWindow(){
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
+// function toggleWindow(){
+//   var popup = document.getElementById("myPopup");
+//   popup.classList.toggle("show");
+// }
 
 function fireIvo(){
   document.getElementById("dialogWindow").style.display = 'block';

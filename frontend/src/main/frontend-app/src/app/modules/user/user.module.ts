@@ -4,13 +4,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {UserRoutingModule} from "./user-routing.module";
 import {FormsModule} from "@angular/forms";
+import { PopoverComponent } from './login/popover/popover.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PopoverComponent
   ],
     imports: [
         CommonModule,

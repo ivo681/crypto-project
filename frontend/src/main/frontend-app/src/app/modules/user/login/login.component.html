@@ -48,9 +48,7 @@
           Password must be at least 8 characters long, including: 1 uppercase, 1 lowercase, 1 number, 1 special character</small>
       </div>
       <p class="message">Not registered? <a [routerLink]="['../register']">Register</a></p>
-      <p class="popup message" onclick="toggleWindow()">Forgot password?
-        <span class="popuptext" id="myPopup">Relax and try to remember your password :)</span>
-      </p>
+      <app-popover></app-popover>
       <button class="btn btn-lg btn-primary btn-block" type="submit" >
         Sign in
       </button>
